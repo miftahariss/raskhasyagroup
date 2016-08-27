@@ -23,8 +23,8 @@ class Frontend extends CI_Controller {
     }
 
     public function category(){
-        $data['base']                = 'Category';
         $root                        = $this->uri->segment(2);
+        $data['base']                = $root;
         $limit                       = 24;
 
         $categoryId                  = $this->m_frontend->getCategoryId($root);

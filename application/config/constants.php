@@ -36,8 +36,8 @@ define('FOPEN_READ_WRITE_CREATE',				'a+b');
 define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
-define('URL_EDITOR', 'http://code.gramedia-digital.com/staging/native/autobacs/asset_admin/assets/embed/');
-define('DIR_EDITOR', '/var/www/html/staging/native/autobacs/asset_admin/assets/embed');
+define('URL_EDITOR', 'http://localhost/raskhasyagroup/asset_admin/assets/embed/');
+define('DIR_EDITOR', '/var/www/html/raskhasyagroup/asset_admin/assets/embed');
 
 
 /* End of file constants.php */

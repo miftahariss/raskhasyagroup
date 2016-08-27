@@ -14,8 +14,8 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <div class="container-navbar">
                 <ul class="nav navbar-nav">
-                    <li class="first-child active"><a href="<?php echo base_url(); ?>">HOME </a></li>
-                    <li><a href="<?php echo base_url(); ?>profile">PROFILE</a></li>
+                    <li <?php if($base == 'Home'): ?> class="first-child active" <?php endif; ?>><a href="<?php echo base_url(); ?>">HOME </a></li>
+                    <li <?php if($base == 'Profile'): ?> class="first-child active" <?php endif; ?>><a href="<?php echo base_url(); ?>profile">PROFILE</a></li>
 
                     <?php if(isset($category) && $category != FALSE): ?>
                         <?php foreach($category as $data): ?>
@@ -30,11 +30,11 @@
                                     </ul>
                                 </li>
                             <?php else: ?>
-                                <li><a href="<?php echo base_url().'category/'.$data->permalink; ?>"><?php echo $data->title; ?></a></li>
+                                <li <?php if($base == $data->permalink): ?> class="first-child active" <?php endif; ?>><a href="<?php echo base_url().'category/'.$data->permalink; ?>"><?php echo $data->title; ?></a></li>
                             <?php endif; ?>
                         <?php endforeach; ?>
                     <?php endif; ?>
-                    <li><a href="<?php echo base_url(); ?>hubungi-kami">HUBUNGI KAMI</a></li>
+                    <li <?php if($base == 'Contact'): ?> class="first-child active" <?php endif; ?>><a href="<?php echo base_url(); ?>hubungi-kami">HUBUNGI KAMI</a></li>
                 </ul>
             </div> <!-- end of container-navbar -->
         </div><!-- /.navbar-collapse -->

@@ -10,7 +10,7 @@ CKEDITOR.editorConfig = function( config ) {
 
     config.allowedContent = true;
 
-    var base_url = window.location.origin+"/autobacs_countdown";
+    var base_url = window.location.origin+"/raskhasyagroup";
 //    var base_url = window.location.origin;
 
     config.filebrowserImageBrowseUrl = base_url + '/asset_admin/assets/js/kcfinder/browse.php?type=images';
