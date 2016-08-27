@@ -10,36 +10,167 @@ class Frontend extends CI_Controller {
         $this->load->model('m_frontend');
     }
 
-    function updateCount($id) {
-        $query = $this->m_frontend->get_count($id);
+    public function index(){
+    	$data['base']               = 'Home';
 
-        if (count($query) > 0) {
-            $counter = array(
-                'counter_count' => $query[0]['counter_count'] + 1,
-                'counter_count_date' => date('Y-m-d H:i:s')
-            );
+        $data['slider']             = $this->m_frontend->getSlider();
+        $data['category']           = $this->m_frontend->getCategory();
+        $data['kegiatan']           = $this->m_frontend->getKegiatan();
+        $data['mitra']              = $this->m_frontend->getMitra();
 
-            $this->m_frontend->count_view($counter, $id);
-        } else {
-            $counter = array(
-                'counter_article_id' => $id,
-                'counter_count' => 1,
-                'counter_count_date' => date('Y-m-d H:i:s')
-            );
-
-            $this->m_frontend->save_count_view($counter);
-        }
+        $data['mainpage']           = 'frontend/home';
+        $this->load->view('frontend/templates', $data);
     }
 
-    public function index(){
-    	$data['base'] = 'Home';
+    public function category(){
+        $data['base']                = 'Category';
+        $root                        = $this->uri->segment(2);
+        $limit                       = 24;
 
-        $data['mainpage'] = 'frontend/home';
+        $categoryId                  = $this->m_frontend->getCategoryId($root);
+        $data['category']            = $this->m_frontend->getCategory();
+
+        $this->updateCountCategory($categoryId[0]->id);
+
+        $this->db->order_by('id', 'desc');
+        $this->db->where('status', '1');
+        $this->db->where('id_category', $categoryId[0]->id);
+        $this->db->limit($limit, $this->uri->segment(3));
+        $data['product']             = $this->db->get('product')->result();
+
+        $this->db->where('status', '1');
+        $this->db->where('id_category', $categoryId[0]->id);
+        $data['total']               = $this->db->get('product')->num_rows();
+
+        $this->load->library('pagination');
+        $config['base_url']          = site_url('category/'.$root);
+        $config['total_rows']        = $data['total'];
+        $config['per_page']          = $limit;
+        $config['uri_segment']       = 3;
+        $config['num_links']         = 2;
+        $config['prev_link']         = '&laquo;';
+        $config['prev_tag_open']     = '<li><span><span aria-hidden="true">';
+        $config['prev_tag_close']    = '</span></span></li>';
+        $config['next_link']         = '»';
+        $config['next_tag_open']     = '<li><span aria-hidden="true">';
+        $config['next_tag_close']    = '</span></li>';
+        $config['last_link']         = '';
+        $config['last_tag_open']     = '';
+        $config['last_tag_close']    = '';
+        $config['first_link']        = '';
+        $config['first_tag_open']    = '';
+        $config['first_tag_close']   = '';
+        $config['num_tag_open']      = '<li><span>';
+        $config['num_tag_close']     = '</span></li>';
+        $config['cur_tag_open']      = '<li class="active"><span>';
+        $config['cur_tag_close']     = '<span class="sr-only">(current)</span></span></li>';
+        $config['full_tag_open']     = '<ul class="pagination pagination-sm">';
+        $config['full_tag_close']    = '</ul>';
+
+        $this->pagination->initialize($config);
+        $data['page_links'] = $this->pagination->create_links();
+
+        $data['mainpage']            = 'frontend/channel/category';
+        $this->load->view('frontend/templates', $data);
+    }
+
+    public function produk(){
+        $data['base']                = 'Produk';
+        $permalink                   = $this->uri->segment(2);
+
+        $data['category']            = $this->m_frontend->getCategory();
+        $data['detail']              = $this->m_frontend->getProductDetail($permalink);
+
+        $this->updateCountProduct($data['detail'][0]->id);
+
+        $data['mainpage']            = 'frontend/detail/product';
+        $this->load->view('frontend/templates', $data);
+    }
+
+    public function kegiatan(){
+        $data['base']                = 'Kegiatan';
+        $limit                       = 6;
+
+        $data['category']            = $this->m_frontend->getCategory();
+
+        $this->db->order_by('id', 'desc');
+        $this->db->where('status', '1');
+        $this->db->limit($limit, $this->uri->segment(2));
+        $data['kegiatan']            = $this->db->get('kegiatan')->result();
+
+        $this->db->where('status', '1');
+        $data['total']               = $this->db->get('kegiatan')->num_rows();
+
+        $this->load->library('pagination');
+        $config['base_url']          = site_url('kegiatan');
+        $config['total_rows']        = $data['total'];
+        $config['per_page']          = $limit;
+        $config['uri_segment']       = 2;
+        $config['num_links']         = 2;
+        $config['prev_link']         = '&laquo;';
+        $config['prev_tag_open']     = '<li><span><span aria-hidden="true">';
+        $config['prev_tag_close']    = '</span></span></li>';
+        $config['next_link']         = '»';
+        $config['next_tag_open']     = '<li><span aria-hidden="true">';
+        $config['next_tag_close']    = '</span></li>';
+        $config['last_link']         = '';
+        $config['last_tag_open']     = '';
+        $config['last_tag_close']    = '';
+        $config['first_link']        = '';
+        $config['first_tag_open']    = '';
+        $config['first_tag_close']   = '';
+        $config['num_tag_open']      = '<li><span>';
+        $config['num_tag_close']     = '</span></li>';
+        $config['cur_tag_open']      = '<li class="active"><span>';
+        $config['cur_tag_close']     = '<span class="sr-only">(current)</span></span></li>';
+        $config['full_tag_open']     = '<ul class="pagination pagination-sm">';
+        $config['full_tag_close']    = '</ul>';
+
+        $this->pagination->initialize($config);
+        $data['page_links'] = $this->pagination->create_links();
+
+        $data['mainpage']            = 'frontend/channel/kegiatan';
+        $this->load->view('frontend/templates', $data);
+    }
+
+    public function kegiatanDetail(){
+        $data['base']                = 'Kegiatan';
+        $permalink                   = $this->uri->segment(2);
+
+        $data['category']            = $this->m_frontend->getCategory();
+        $data['detail']              = $this->m_frontend->getKegiatanDetail($permalink);
+
+        $this->updateCountKegiatan($data['detail'][0]->id);
+
+        $data['mainpage']            = 'frontend/detail/kegiatan';
+        $this->load->view('frontend/templates', $data);
+    }
+
+    public function profile(){
+        $data['base']               = 'Profile';
+
+        $data['category']           = $this->m_frontend->getCategory();
+        $data['profile']            = $this->m_frontend->getProfile();
+
+        $data['mainpage']           = 'frontend/channel/profile';
         $this->load->view('frontend/templates', $data);
     }
 
     public function contactus(){
-        $data['base'] = 'Aboutus';
+        $data['base']               = 'Contact';
+
+        $data['category']           = $this->m_frontend->getCategory();
+
+        if ($this->input->post('submit')) {
+
+        }
+
+        $data['mainpage']           = 'frontend/channel/contactus';
+        $this->load->view('frontend/templates', $data);
+    }
+
+    public function contactusold(){
+        $data['base'] = 'Contact';
 
         require_once APPPATH."/third_party/recaptchalib.php";
         
@@ -108,6 +239,69 @@ class Frontend extends CI_Controller {
 
         $data['mainpage'] = 'frontend/contactus';
         $this->load->view('frontend/templates', $data);
+    }
+
+    function updateCountCategory($id) {
+        $query = $this->m_frontend->get_count_category($id);
+
+        if (count($query) > 0) {
+            $counter = array(
+                'counter_count' => $query[0]['counter_count'] + 1,
+                'counter_count_date' => date('Y-m-d H:i:s')
+            );
+
+            $this->m_frontend->count_view_category($counter, $id);
+        } else {
+            $counter = array(
+                'counter_category_id' => $id,
+                'counter_count' => 1,
+                'counter_count_date' => date('Y-m-d H:i:s')
+            );
+
+            $this->m_frontend->save_count_view_category($counter);
+        }
+    }
+
+    function updateCountProduct($id) {
+        $query = $this->m_frontend->get_count_product($id);
+
+        if (count($query) > 0) {
+            $counter = array(
+                'counter_count' => $query[0]['counter_count'] + 1,
+                'counter_count_date' => date('Y-m-d H:i:s')
+            );
+
+            $this->m_frontend->count_view_product($counter, $id);
+        } else {
+            $counter = array(
+                'counter_product_id' => $id,
+                'counter_count' => 1,
+                'counter_count_date' => date('Y-m-d H:i:s')
+            );
+
+            $this->m_frontend->save_count_view_product($counter);
+        }
+    }
+
+    function updateCountKegiatan($id) {
+        $query = $this->m_frontend->get_count_kegiatan($id);
+
+        if (count($query) > 0) {
+            $counter = array(
+                'counter_count' => $query[0]['counter_count'] + 1,
+                'counter_count_date' => date('Y-m-d H:i:s')
+            );
+
+            $this->m_frontend->count_view_kegiatan($counter, $id);
+        } else {
+            $counter = array(
+                'counter_kegiatan_id' => $id,
+                'counter_count' => 1,
+                'counter_count_date' => date('Y-m-d H:i:s')
+            );
+
+            $this->m_frontend->save_count_view_kegiatan($counter);
+        }
     }
 
 }

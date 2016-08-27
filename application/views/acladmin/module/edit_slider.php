@@ -10,16 +10,9 @@
             </td>
         </tr>
         <tr>
-            <td>Link</td>
-            <td>
-                <input type="text" name="link" value="<?php echo $article->link ?>" class="input input-block-level" />
-                <span class="alert-error"><?php echo form_error('link')?></span>
-            </td>
-        </tr>
-        <tr>
             <td>Slider Number</td>
             <td>
-                <input type="text" name="order_number" value="<?php echo $article->order_number ?>" class="input input-block-level" />
+                <input type="number" name="order_number" value="<?php echo $article->order_number ?>" class="input input-block-level" />
                 <span class="alert-error"><?php echo form_error('order_number')?></span>
             </td>
         </tr>
@@ -35,7 +28,6 @@
                 <span class="alert-error"><?php echo form_error('userfile'); ?></span>
             </td>
         </tr>
-        <input type="hidden" name="id_account" value="<?php echo $article->id_account; ?>" />
     </table>
 <!--    <table class="table table-striped" id="editPhoto">
         <tr>

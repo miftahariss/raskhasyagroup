@@ -15,6 +15,7 @@
         <th>Title</th>
         <th>Photo</th>
         <th>Category</th>
+        <th>Hits</th>
         <th>Created Date</th>
         <th>Modified Date</th>
         <th>Action</th>
@@ -36,6 +37,18 @@
                     <?php
                         $category = $this->acladminmodel->getIdCategory($r->id_category);
                         echo $category->title;
+                    ?>
+                </small>
+            </td>
+            <td>
+                <small>
+                    <?php
+                        $hits = $this->acladminmodel->productHits($r->id);
+                        if(isset($hits) && $hits != FALSE){
+                            echo $hits[0]->counter_count;
+                        } else {
+                            echo '0';
+                        }
                     ?>
                 </small>
             </td>

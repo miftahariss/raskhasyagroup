@@ -9,18 +9,66 @@ class Acladminmodel extends CI_Model {
 
     private $table = array(
         'user' => 'user',
+        'slider' => 'slider',
         'category' => 'category',
         'product' => 'product',
+        'kegiatan' => 'kegiatan',
+        'mitra' => 'mitra',
+        'profile' => 'profile',
+
+
         'product_sub' => 'product_sub',
         'product_kategori' => 'product_kategori',
         'product_gallery_foto' => 'product_gallery_foto',
         'article' => 'article',
         'article_gallery_foto' => 'article_gallery_foto',
-        'slider' => 'slider',
         'popup' => 'popup',
         'store' => 'store',
         'about' => 'about'
     );
+
+    /**
+     * show all data hits
+     * status 1
+     * @param type $id
+     * @return count
+     */
+
+    public function categoryHits($id){
+        $this->db->select('counter_count');
+        $this->db->where('counter_category_id', $id);
+        $query = $this->db->get('category_counter');
+
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        }
+
+        return false;
+    }
+
+    public function productHits($id){
+        $this->db->select('counter_count');
+        $this->db->where('counter_product_id', $id);
+        $query = $this->db->get('product_counter');
+
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        }
+
+        return false;
+    }
+
+    public function kegiatanHits($id){
+        $this->db->select('counter_count');
+        $this->db->where('counter_kegiatan_id', $id);
+        $query = $this->db->get('kegiatan_counter');
+
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        }
+
+        return false;
+    }
 
     /**
      * show all data event
@@ -59,6 +107,26 @@ class Acladminmodel extends CI_Model {
     public function countProduct($status) {
         $this->db->select('id');
         $this->db->from($this->table['product']);
+        $this->db->where('status', $status);
+
+        $count = $this->db->count_all_results();
+
+        return $count;
+    }
+
+    public function countKegiatan($status) {
+        $this->db->select('id');
+        $this->db->from($this->table['kegiatan']);
+        $this->db->where('status', $status);
+
+        $count = $this->db->count_all_results();
+
+        return $count;
+    }
+
+    public function countMitra($status) {
+        $this->db->select('id');
+        $this->db->from($this->table['mitra']);
         $this->db->where('status', $status);
 
         $count = $this->db->count_all_results();
@@ -157,6 +225,43 @@ class Acladminmodel extends CI_Model {
 
         $this->db->limit($limit, $start);
         $this->db->order_by('id', 'desc');
+        $query = $this->db->get();
+
+        return $query->result();
+    }
+
+    public function fetchKegiatan($limit, $start) {
+        $this->db->select('*');
+        $this->db->from($this->table['kegiatan']);
+        $this->db->where('status', 1);
+
+        $this->db->limit($limit, $start);
+        $this->db->order_by('id', 'desc');
+        $query = $this->db->get();
+
+        return $query->result();
+    }
+
+    public function fetchMitra($limit, $start) {
+        $this->db->select('*');
+        $this->db->from($this->table['mitra']);
+        $this->db->where('status', 1);
+
+        $this->db->limit($limit, $start);
+        $this->db->order_by('id', 'desc');
+        $query = $this->db->get();
+
+        return $query->result();
+    }
+
+    public function fetchProfile(){
+        $this->db->select('*');
+        $this->db->from($this->table['profile']);
+        $this->db->where('status', 1);
+        $this->db->order_by('id', 'DESC');
+
+        //$this->db->limit($limit, $start);
+        //$this->db->order_by('profil.id', 'desc');
         $query = $this->db->get();
 
         return $query->result();
@@ -344,6 +449,18 @@ class Acladminmodel extends CI_Model {
         return $this->db->insert_id();
     }
 
+    public function addKegiatan($data) {
+        $this->db->insert($this->table['kegiatan'], $data);
+
+        return $this->db->insert_id();
+    }
+
+    public function addMitra($data) {
+        $this->db->insert($this->table['mitra'], $data);
+
+        return $this->db->insert_id();
+    }
+
     public function addKategori($data) {
         $this->db->insert($this->table['product_kategori'], $data);
 
@@ -495,6 +612,21 @@ class Acladminmodel extends CI_Model {
         $this->db->update($this->table['product'], $data);
     }
 
+    public function updateKegiatan($data, $id) {
+        $this->db->where('id', $id);
+        $this->db->update($this->table['kegiatan'], $data);
+    }
+
+    public function updateMitra($data, $id) {
+        $this->db->where('id', $id);
+        $this->db->update($this->table['mitra'], $data);
+    }
+
+    public function updateProfile($data, $id) {
+        $this->db->where('id', $id);
+        $this->db->update($this->table['profile'], $data);
+    }
+
     public function updateProductGalleryFoto($data, $id) {
         $this->db->where('id', $id);
         $this->db->update($this->table['product_gallery_foto'], $data);
@@ -586,6 +718,16 @@ class Acladminmodel extends CI_Model {
         $this->db->update($this->table['product'], $data);
     }
 
+    public function deleteKegiatan($data, $id) {
+        $this->db->where('id', $id);
+        $this->db->update($this->table['kegiatan'], $data);
+    }
+
+    public function deleteMitra($data, $id) {
+        $this->db->where('id', $id);
+        $this->db->update($this->table['category'], $data);
+    }
+
     public function deleteArticle($data, $id) {
         $this->db->where('id', $id);
         $this->db->update($this->table['article'], $data);
@@ -665,6 +807,27 @@ class Acladminmodel extends CI_Model {
     public function getIdProduct($id) {
         $this->db->where('id', $id);
         $query = $this->db->get($this->table['product']);
+
+        return $query->row();
+    }
+
+    public function getIdKegiatan($id) {
+        $this->db->where('id', $id);
+        $query = $this->db->get($this->table['kegiatan']);
+
+        return $query->row();
+    }
+
+    public function getIdMitra($id) {
+        $this->db->where('id', $id);
+        $query = $this->db->get($this->table['mitra']);
+
+        return $query->row();
+    }
+
+    public function getIdProfile($id) {
+        $this->db->where('id', $id);
+        $query = $this->db->get($this->table['profile']);
 
         return $query->row();
     }

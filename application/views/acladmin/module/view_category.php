@@ -14,6 +14,7 @@
         <th>ID</th>
         <th>Title</th>
         <th>Photo</th>
+        <th>Hits</th>
         <th>Created Date</th>
         <th>Modified Date</th>
         <th>Action</th>
@@ -29,6 +30,18 @@
             	<?php else: ?>
             		<img class="thumbnail" src="<?php echo base_url()?>asset_admin/assets/uploads/cover/small/<?php echo $r->filename?>" width="70" />
             	<?php endif; ?>
+            </td>
+            <td>
+                <small>
+                    <?php
+                        $hits = $this->acladminmodel->categoryHits($r->id);
+                        if(isset($hits) && $hits != FALSE){
+                            echo $hits[0]->counter_count;
+                        } else {
+                            echo '0';
+                        }
+                    ?>
+                </small>
             </td>
             <td><small>
             <?php 

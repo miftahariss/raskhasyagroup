@@ -9,13 +9,6 @@
             </td>
         </tr>
         <tr>
-            <td>Link</td>
-            <td>
-                <input type="text" name="link" value="<?php echo set_value('link')?>" class="input input-block-level" required="required" placeholder="http://" />
-                <span class="alert-error"><?php echo form_error('link')?></span>
-            </td>
-        </tr>
-        <tr>
             <td>Foto Utama<code>Maksimal 2MB</code></td>
             <td>
                 <input type="file" name="userfile" /><code>minimum file dimension 1250x500 pixel</code>

@@ -25,16 +25,24 @@
                         <li><a href="<?php echo base_url()?>backend/acladmin/view_product"><span class="icon-list"></span> View Product</a></li>
                     </ul>
                 </li>
-                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Store <b class="caret"></b></a>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Kegiatan <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="<?php echo base_url()?>backend/acladmin/view_store"><span class="icon-list"></span> View Store</a></li>
+                        <li><a href="<?php echo base_url()?>backend/acladmin/add_kegiatan"><span class="icon-plus-sign"></span> Add Kegiatan</a></li>
+                        <li><a href="<?php echo base_url()?>backend/acladmin/view_kegiatan"><span class="icon-list"></span> View Kegiatan</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">About <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Mitra <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="<?php echo base_url()?>backend/acladmin/view_about"><span class="icon-list"></span> View About</a></li>
+                        <li><a href="<?php echo base_url()?>backend/acladmin/add_mitra"><span class="icon-plus-sign"></span> Add Mitra</a></li>
+                        <li><a href="<?php echo base_url()?>backend/acladmin/view_mitra"><span class="icon-list"></span> View Mitra</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Profile <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="<?php echo base_url()?>backend/acladmin/view_profile"><span class="icon-list"></span> View Profile</a></li>
                     </ul>
                 </li>
 

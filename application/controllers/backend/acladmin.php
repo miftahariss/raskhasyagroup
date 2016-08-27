@@ -392,6 +392,92 @@ class Acladmin extends CI_Controller {
         $this->load->view('acladmin/main', $data);
     }
 
+    public function add_kegiatan() {
+        $permalink = url_title($this->input->post('title'), 'dash', true);
+        if ($this->input->post('submit')) {
+            // validation
+            $valid = $this->form_validation;
+            $valid->set_rules('title', 'Judul', 'required');
+            $valid->set_rules('short_desc', 'Short Desc', 'required');
+            //$valid->set_rules('body', 'Isi', 'required');
+            if (isset($_FILES['userfile']['name']) && $_FILES['userfile']['name'] == "") {
+                $valid->set_rules('userfile', 'Foto', 'required');
+            }
+
+            if ($valid->run() == false) {
+                // run
+            } else {
+
+                $format_upload = $this->upload();
+                $data = array(
+                    'title' => $this->input->post('title'),
+                    'short_desc' => $this->input->post('short_desc'),
+                    'body' => $this->input->post('body'),
+                    'filename' => $format_upload,
+                    //'headline'         => $this->input->post('headline') ? 1 : 0,
+                    'permalink' => $permalink,
+                    'created_date' => time(),
+                    'modified_date' => null,
+                    'created_by' => $this->sess_id,
+                    'modified_by' => null,
+                    'status' => 1,
+                );
+
+                $id = $this->acladminmodel->addKegiatan($data);
+
+                redirect('backend/acladmin/view_kegiatan');
+            }
+        }
+        $data['page'] = 'add_kegiatan';
+        $data['title'] = 'Tambah Kegiatan Baru';
+
+        $data['content'] = $this->load->view('acladmin/module/add_kegiatan', $data, true);
+        $this->load->view('acladmin/main', $data);
+    }
+
+    public function add_mitra() {
+        $permalink = url_title($this->input->post('title'), 'dash', true);
+        if ($this->input->post('submit')) {
+            // validation
+            $valid = $this->form_validation;
+            $valid->set_rules('title', 'Judul', 'required');
+            $valid->set_rules('short_desc', 'Short Desc', 'required');
+            //$valid->set_rules('body', 'Isi', 'required');
+            if (isset($_FILES['userfile']['name']) && $_FILES['userfile']['name'] == "") {
+                $valid->set_rules('userfile', 'Foto', 'required');
+            }
+
+            if ($valid->run() == false) {
+                // run
+            } else {
+
+                $format_upload = $this->upload();
+                $data = array(
+                    'title' => $this->input->post('title'),
+                    'short_desc' => $this->input->post('short_desc'),
+                    'body' => $this->input->post('body'),
+                    'filename' => $format_upload,
+                    //'headline'         => $this->input->post('headline') ? 1 : 0,
+                    'permalink' => $permalink,
+                    'created_date' => time(),
+                    'modified_date' => null,
+                    'created_by' => $this->sess_id,
+                    'modified_by' => null,
+                    'status' => 1,
+                );
+
+                $id = $this->acladminmodel->addMitra($data);
+
+                redirect('backend/acladmin/view_mitra');
+            }
+        }
+        $data['page'] = 'add_mitra';
+        $data['title'] = 'Tambah Mitra Baru';
+
+        $data['content'] = $this->load->view('acladmin/module/add_mitra', $data, true);
+        $this->load->view('acladmin/main', $data);
+    }
+
     public function add_kategori() {
         $permalink = url_title($this->input->post('title'), 'dash', true);
         if ($this->input->post('submit')) {
@@ -502,9 +588,9 @@ class Acladmin extends CI_Controller {
 
                 $format_upload = $this->upload();
                 $data = array(
-                    'id_account' => 1,
+                    //'id_account' => 1,
                     'title' => $this->input->post('title'),
-                    'link' => $this->input->post('link'),
+                    //'link' => $this->input->post('link'),
                     'filename' => $format_upload,
                     'order_number' => $new_order,
                     'permalink' => $permalink,
@@ -567,6 +653,55 @@ class Acladmin extends CI_Controller {
         $data['page'] = 'view_product';
         $data['title'] = 'Product';
         $data['content'] = $this->load->view('acladmin/module/view_product', $data, true);
+        $this->load->view('acladmin/main', $data);
+    }
+
+    public function view_kegiatan() {
+        $data['headline'] = $this->input->get('filter') ? $this->input->get('filter') : '1';
+        $this->load->library('pagination');
+        $config['base_url'] = site_url('backend/acladmin/view_kegiatan');
+        $config['per_page'] = $this->limit;
+        $config['total_rows'] = $this->acladminmodel->countKegiatan(1);
+        $config['uri_segment'] = 4;
+        $config['first_url'] = $config['base_url'] . '?' . http_build_query($_GET);
+        $this->pagination->initialize($config);
+
+        $page = ($this->uri->segment(4) ? $this->uri->segment(4) : '');
+        $data['media'] = $this->acladminmodel->fetchKegiatan($config['per_page'], $page);
+        $data['links'] = $this->pagination->create_links();
+        $data['total_rows'] = $config['total_rows'];
+        $data['page'] = 'view_kegiatan';
+        $data['title'] = 'Kegiatan';
+        $data['content'] = $this->load->view('acladmin/module/view_kegiatan', $data, true);
+        $this->load->view('acladmin/main', $data);
+    }
+
+    public function view_mitra() {
+        $data['headline'] = $this->input->get('filter') ? $this->input->get('filter') : '1';
+        $this->load->library('pagination');
+        $config['base_url'] = site_url('backend/acladmin/view_mitra');
+        $config['per_page'] = $this->limit;
+        $config['total_rows'] = $this->acladminmodel->countMitra(1);
+        $config['uri_segment'] = 4;
+        $config['first_url'] = $config['base_url'] . '?' . http_build_query($_GET);
+        $this->pagination->initialize($config);
+
+        $page = ($this->uri->segment(4) ? $this->uri->segment(4) : '');
+        $data['media'] = $this->acladminmodel->fetchMitra($config['per_page'], $page);
+        $data['links'] = $this->pagination->create_links();
+        $data['total_rows'] = $config['total_rows'];
+        $data['page'] = 'view_mitra';
+        $data['title'] = 'Mitra';
+        $data['content'] = $this->load->view('acladmin/module/view_mitra', $data, true);
+        $this->load->view('acladmin/main', $data);
+    }
+
+    public function view_profile() {
+        $data['headline'] = $this->input->get('filter') ? $this->input->get('filter') : '1';
+        $data['banner'] = $this->acladminmodel->fetchProfile();
+        $data['page'] = 'view_profile';
+        $data['title'] = 'Profile';
+        $data['content'] = $this->load->view('acladmin/module/view_profile', $data, true);
         $this->load->view('acladmin/main', $data);
     }
 
@@ -770,6 +905,159 @@ class Acladmin extends CI_Controller {
             $this->load->view('acladmin/main', $data);
         } else {
             redirect('backend/acladmin/view_product');
+        }
+    }
+
+    public function edit_kegiatan() {
+        $id = $this->uri->segment(4);
+        if ($id) {
+            $permalink = url_title($this->input->post('title'), 'dash', true);
+            if ($this->input->post('submit')) {
+                $valid = $this->form_validation;
+                $valid->set_rules('title', 'Judul', 'required');
+                $valid->set_rules('short_desc', 'Short Desc', 'required');
+                //$valid->set_rules('body', 'Isi', 'required');
+
+                if ($valid->run() == false) {
+                    // show error in view
+                } else {
+                    $format_upload = $this->upload();
+                    if ($format_upload != "") {
+                        $data = array(
+                            'id' => $id,
+                            'title' => $this->input->post('title'),
+                            'short_desc' => $this->input->post('short_desc'),
+                            'body' => $this->input->post('body'),
+                            'filename' => $format_upload,
+                            //'headline'         => $this->input->post('headline') ? 1 : 0,
+                            'permalink' => $permalink,
+                            'modified_date' => time(),
+                            'modified_by' => $this->sess_id,
+                            'status' => 1
+                        );
+                        $this->acladminmodel->updateKegiatan($data, $id);
+                    } else {
+                        $data = array(
+                            'id' => $id,
+                            'title' => $this->input->post('title'),
+                            'short_desc' => $this->input->post('short_desc'),
+                            'body' => $this->input->post('body'),
+                            //'headline'         => $this->input->post('headline'),
+                            'permalink' => $permalink,
+                            'modified_date' => time(),
+                            'modified_by' => $this->sess_id,
+                            'status' => 1
+                        );
+                        $this->acladminmodel->updateKegiatan($data, $id);
+                    }
+
+                    redirect('backend/acladmin/view_kegiatan');
+                }
+            }
+            $data['page'] = 'edit_kegiatan';
+            $data['title'] = 'Edit Kegiatan';
+            $data['article'] = $this->acladminmodel->getIdKegiatan($id);
+            
+            $data['content'] = $this->load->view('acladmin/module/edit_kegiatan', $data, true);
+            $this->load->view('acladmin/main', $data);
+        } else {
+            redirect('backend/acladmin/view_kegiatan');
+        }
+    }
+
+    public function edit_mitra() {
+        $id = $this->uri->segment(4);
+        if ($id) {
+            $permalink = url_title($this->input->post('title'), 'dash', true);
+            if ($this->input->post('submit')) {
+                $valid = $this->form_validation;
+                $valid->set_rules('title', 'Judul', 'required');
+                $valid->set_rules('short_desc', 'Short Desc', 'required');
+                //$valid->set_rules('body', 'Isi', 'required');
+
+                if ($valid->run() == false) {
+                    // show error in view
+                } else {
+                    $format_upload = $this->upload();
+                    if ($format_upload != "") {
+                        $data = array(
+                            'id' => $id,
+                            'title' => $this->input->post('title'),
+                            'short_desc' => $this->input->post('short_desc'),
+                            'body' => $this->input->post('body'),
+                            'filename' => $format_upload,
+                            //'headline'         => $this->input->post('headline') ? 1 : 0,
+                            'permalink' => $permalink,
+                            'modified_date' => time(),
+                            'modified_by' => $this->sess_id,
+                            'status' => 1
+                        );
+                        $this->acladminmodel->updateMitra($data, $id);
+                    } else {
+                        $data = array(
+                            'id' => $id,
+                            'title' => $this->input->post('title'),
+                            'short_desc' => $this->input->post('short_desc'),
+                            'body' => $this->input->post('body'),
+                            //'headline'         => $this->input->post('headline'),
+                            'permalink' => $permalink,
+                            'modified_date' => time(),
+                            'modified_by' => $this->sess_id,
+                            'status' => 1
+                        );
+                        $this->acladminmodel->updateMitra($data, $id);
+                    }
+
+                    redirect('backend/acladmin/view_mitra');
+                }
+            }
+            $data['page'] = 'edit_mitra';
+            $data['title'] = 'Edit Mitra';
+            $data['article'] = $this->acladminmodel->getIdMitra($id);
+            
+            $data['content'] = $this->load->view('acladmin/module/edit_mitra', $data, true);
+            $this->load->view('acladmin/main', $data);
+        } else {
+            redirect('backend/acladmin/view_mitra');
+        }
+    }
+
+    public function edit_profile() {
+        $id = $this->uri->segment(4);
+        if ($id) {
+            if ($this->input->post('submit')) {
+                $valid = $this->form_validation;
+                $valid->set_rules('title', 'Judul', 'required');
+                $valid->set_rules('body', 'Isi', 'required');
+
+                if ($valid->run() == false) {
+                    // show error in view
+                } else {
+                        $data = array(
+                                'id' => $id,
+                                'title' => $this->input->post('title'),
+                                'body' => $this->input->post('body'),
+                                'modified_date' => time(),
+                                'modified_by' => $this->sess_id,
+                                'status' => 1
+                            );
+                        $this->acladminmodel->updateProfile($data, $id);
+
+//                    $gallery = $this->upload_gallery();
+//                    $this->acladminmodel->addGalleryArticle($gallery, $id);
+
+                    redirect('backend/acladmin/view_profile');
+                }
+            }
+            $data['page'] = 'edit_profile';
+            $data['title'] = 'Edit Profile';
+            $data['article'] = $this->acladminmodel->getIdProfile($id);
+            //$data['photos']  = $this->acladminmodel->getIdGalleryArticle($id);
+
+            $data['content'] = $this->load->view('acladmin/module/edit_profile', $data, true);
+            $this->load->view('acladmin/main', $data);
+        } else {
+            redirect('backend/acladmin/view_profile');
         }
     }
 
@@ -1010,7 +1298,7 @@ class Acladmin extends CI_Controller {
                         $data = array(
                             'id' => $id,
                             'title' => $this->input->post('title'),
-                            'link' => $this->input->post('link'),
+                            //'link' => $this->input->post('link'),
                             'order_number' => $this->input->post('order_number'),
                             'filename' => $format_upload,
                             'permalink' => $permalink,
@@ -1023,7 +1311,7 @@ class Acladmin extends CI_Controller {
                         $data = array(
                             'id' => $id,
                             'title' => $this->input->post('title'),
-                            'link' => $this->input->post('link'),
+                            //'link' => $this->input->post('link'),
                             'order_number' => $this->input->post('order_number'),
                             'permalink' => $permalink,
                             'modified_date' => time(),
@@ -1272,6 +1560,28 @@ class Acladmin extends CI_Controller {
             redirect('backend/acladmin/view_product');
         } else {
             redirect('backend/acladmin/view_product');
+        }
+    }
+
+    public function delete_kegiatan() {
+        if ($this->uri->segment(4)) {
+            $data = array('status' => 0);
+            $id = $this->uri->segment(4);
+            $this->acladminmodel->deleteKegiatan($data, $id);
+            redirect('backend/acladmin/view_kegiatan');
+        } else {
+            redirect('backend/acladmin/view_kegiatan');
+        }
+    }
+
+    public function delete_mitra() {
+        if ($this->uri->segment(4)) {
+            $data = array('status' => 0);
+            $id = $this->uri->segment(4);
+            $this->acladminmodel->deleteMitra($data, $id);
+            redirect('backend/acladmin/view_mitra');
+        } else {
+            redirect('backend/acladmin/view_mitra');
         }
     }
 
