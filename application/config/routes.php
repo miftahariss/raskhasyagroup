@@ -37,10 +37,18 @@
 | in the URL cannot be matched to a valid route.
 |
 */
-$route['backend'] = "backend/cmsauth";
+$route['backend'] 					= "backend/cmsauth";
+$route['category/(:any)'] 			= 'frontend/category';
+$route['category/(:any)/(:num)'] 	= "frontend/category";
+$route['produk/(:any)'] 			= 'frontend/produk';
+$route['kegiatan']					= 'frontend/kegiatan';
+$route['kegiatan/(:num)']			= 'frontend/kegiatan';
+$route['kegiatan/(:any)']			= 'frontend/kegiatanDetail';
+$route['profile'] 					= "frontend/profile";
+$route['hubungi-kami']				= "frontend/contactus";
 
-$route['default_controller'] = "welcome";
-$route['404_override'] = 'frontend';
+$route['default_controller'] 		= "frontend";
+$route['404_override'] 				= 'frontend';
 
 
 /* End of file routes.php */
