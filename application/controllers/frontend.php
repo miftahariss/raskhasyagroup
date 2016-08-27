@@ -162,7 +162,45 @@ class Frontend extends CI_Controller {
         $data['category']           = $this->m_frontend->getCategory();
 
         if ($this->input->post('submit')) {
+            $valid = $this->form_validation;
+            $valid->set_rules('nama', 'Nama', 'required');
+            $valid->set_rules('email', 'Email', 'strtolower|required|valid_email');
+            $valid->set_rules('pesan', 'Pesan', 'required|min_length[3]');
 
+            if ($valid->run() == false) {
+                
+            } else {
+                $config = array(
+                    'protocol' => 'smtp',
+                    'smtp_host' => 'ssl://smtp.gmail.com',
+                    'smtp_port' => 465,
+                    'smtp_user' => 'miftahariss15@gmail.com',
+                    'smtp_pass' => 'apaajaboleh0804',
+                    'mailtype' => 'text',
+                    'charset' => 'utf-8',
+                    'wordwrap' => true
+                );
+
+                $this->load->library('email');
+
+                //$this->email->initialize($config);
+
+                $this->email->set_newline("\r\n");
+                $this->email->from($this->input->post('email'), $this->input->post('name'));
+                $this->email->to('firman9675@yahoo.com');
+                //$this->email->to('miftahariss15@gmail.com');
+                //$this->email->cc('bisarenang.id@gmail.com');
+                $this->email->subject($this->input->post('name'));
+
+                $isi = "Nama: ".$this->input->post('nama')."\n"."Email: ".$this->input->post('email')."\n"."\n\n"."Pesan: \n".$this->input->post('pesan');
+                $this->email->message($isi);
+                if ($this->email->send()) {
+                    $this->session->set_flashdata('success', 'Email Terkirim');
+                    redirect(current_url());
+                } else {
+                    show_error($this->email->print_debugger());
+                }
+            }
         }
 
         $data['mainpage']           = 'frontend/channel/contactus';

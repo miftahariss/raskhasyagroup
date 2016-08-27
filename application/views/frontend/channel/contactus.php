@@ -3,6 +3,13 @@
         <h3 class="text-center mt30 "><span class="bg-title-putih">Hubungi Kami</span></h3>
         <div class="line-title "></div>
         <div class="row mt30 mb30">
+            <?php if($this->session->flashdata('success')): ?>
+              <h4>
+                <center>
+                  <font style="color: blue;"><?php echo $this->session->flashdata('success') ?></font>
+                </center>
+              </h4>
+            <?php endif; ?>
             <div class="col-xs-6">
                 <p class="mb5"><span class="glyphicon mr10 glyphicon-map-marker"></span> Jalan Jenderal Sudirman Timur No.65 Jakarta Selatan</p>
                 <p class="mb5"><span class="glyphicon mr10 glyphicon-envelope"></span> Email: raskhasyagroup@gmail.com</p>
@@ -11,21 +18,24 @@
             </div>
             <div class="col-xs-6">
                 <div class="form-kontak">
-                    <form>
+                    <form method="POST">
                       <div class="form-group">
                         <label for="">Nama</label>
-                        <input type="text" class="form-control" id="" placeholder="nama">
+                        <input type="text" class="form-control" id="" placeholder="nama" name="nama" required>
+                        <?php echo form_error('nama'); ?>
                       </div>
                       <div class="form-group">
                         <label for="">Email</label>
-                        <input type="email" class="form-control" id="" placeholder="Email">
+                        <input type="email" class="form-control" id="" placeholder="Email" name="email" required>
+                        <?php echo form_error('email'); ?>
                       </div>
                       <div class="form-group">
                         <label for="">Pesan</label>
-                        <textarea name="" class="form-control" id="" rows="5"></textarea>
+                        <textarea class="form-control" id="" rows="5" name="pesan" required></textarea>
+                        <?php echo form_error('pesan'); ?>
                       </div>
                       
-                      <button type="submit" class="btn btn-danger">Submit</button>
+                      <button type="submit" name="submit" value="submit" class="btn btn-danger">Submit</button>
                     </form>
                 </div>
             </div>

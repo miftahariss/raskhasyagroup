@@ -36,8 +36,13 @@ define('FOPEN_READ_WRITE_CREATE',				'a+b');
 define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
-define('URL_EDITOR', 'http://localhost/raskhasyagroup/asset_admin/assets/embed/');
-define('DIR_EDITOR', '/var/www/html/raskhasyagroup/asset_admin/assets/embed');
+if($_SERVER['HTTP_HOST'] == "localhost") {
+	define('URL_EDITOR', 'http://localhost/raskhasyagroup/asset_admin/assets/embed/');
+	define('DIR_EDITOR', '/var/www/html/raskhasyagroup/asset_admin/assets/embed');
+} else {
+	define('URL_EDITOR', 'http://raskhasyagroup.com/asset_admin/assets/embed/');
+	define('DIR_EDITOR', '/home/raskhasy/public_html/asset_admin/assets/embed');
+}
 
 
 /* End of file constants.php */
