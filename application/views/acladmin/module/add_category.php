@@ -21,20 +21,6 @@
             </td>
         </tr>
         <tr>
-            <td>Short Desc</td>
-            <td>
-                <input type="text" name="short_desc" value="<?php echo set_value('short_desc')?>" class="input input-block-level" required="required" />
-                <span class="alert-error"><?php echo form_error('short_desc')?></span>
-            </td>
-        </tr>
-        <tr>
-            <td>Isi</td>
-            <td>
-                <textarea type="text" name="body" required="required"><?php echo set_value('body')?></textarea>
-                <?php /* <span class="alert-error"><?php echo form_error('body')?></span> */ ?>
-            </td>
-        </tr>
-        <tr>
             <td>Foto Utama<code>Maksimal 2MB</code></td>
             <td>
                 <input type="file" name="userfile" required="required" /><code>minimum file dimension 200 x 300 pixel</code>

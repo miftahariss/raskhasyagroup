@@ -4,7 +4,7 @@
         <div class="line-title "></div>
         <div class="row mt30 mb30">
             <div class="col-xs-5">
-                <img src="<?php echo base_url(); ?>assets/img/produk1.jpg" class="img-responsive" alt="">
+                <img src="<?php echo base_url() ?>asset_admin/assets/uploads/cover/original/<?php echo $profile[0]->filename; ?>" class="img-responsive" alt="">
             </div>
             <div class="col-xs-7">
                 <div class="profile-detail">

@@ -16,6 +16,18 @@
                 <span class="alert-error"><?php echo form_error('body')?></span>
             </td>
         </tr>
+        <tr>
+            <td>Foto <code>Maksimal 2MB</code></td>
+            <td>
+                <?php if ($article->filename == 0): ?>
+                    <span class="label label-important">Foto tidak ditemukan!</span>
+                <?php else: ?>
+                    <img src="<?php echo base_url()?>asset_admin/assets/uploads/cover/small/<?php echo $article->filename ?>" /><br />
+                <?php endif; ?>
+                <input type="file" name="userfile" /><code>minimum file dimension 200 x 300 pixel</code>
+                <span class="alert-error"><?php echo form_error('userfile'); ?></span>
+            </td>
+        </tr>
     </table>
 
     <table class="table table-striped">

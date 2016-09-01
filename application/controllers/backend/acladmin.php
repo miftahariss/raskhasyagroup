@@ -309,7 +309,7 @@ class Acladmin extends CI_Controller {
             // validation
             $valid = $this->form_validation;
             $valid->set_rules('title', 'Judul', 'required');
-            $valid->set_rules('short_desc', 'Short Desc', 'required');
+            //$valid->set_rules('short_desc', 'Short Desc', 'required');
             //$valid->set_rules('body', 'Isi', 'required');
             if (isset($_FILES['userfile']['name']) && $_FILES['userfile']['name'] == "") {
                 $valid->set_rules('userfile', 'Foto', 'required');
@@ -322,8 +322,8 @@ class Acladmin extends CI_Controller {
                 $format_upload = $this->upload();
                 $data = array(
                     'title' => $this->input->post('title'),
-                    'short_desc' => $this->input->post('short_desc'),
-                    'body' => $this->input->post('body'),
+                    //'short_desc' => $this->input->post('short_desc'),
+                    //'body' => $this->input->post('body'),
                     'filename' => $format_upload,
                     //'headline'         => $this->input->post('headline') ? 1 : 0,
                     'permalink' => $permalink,
@@ -590,7 +590,7 @@ class Acladmin extends CI_Controller {
                 $data = array(
                     //'id_account' => 1,
                     'title' => $this->input->post('title'),
-                    //'link' => $this->input->post('link'),
+                    'link' => $this->input->post('link'),
                     'filename' => $format_upload,
                     'order_number' => $new_order,
                     'permalink' => $permalink,
@@ -705,6 +705,15 @@ class Acladmin extends CI_Controller {
         $this->load->view('acladmin/main', $data);
     }
 
+    public function view_contact() {
+        $data['headline'] = $this->input->get('filter') ? $this->input->get('filter') : '1';
+        $data['banner'] = $this->acladminmodel->fetchContact();
+        $data['page'] = 'view_contact';
+        $data['title'] = 'Contact';
+        $data['content'] = $this->load->view('acladmin/module/view_contact', $data, true);
+        $this->load->view('acladmin/main', $data);
+    }
+
     public function view_kategori() {
         $data['headline'] = $this->input->get('filter') ? $this->input->get('filter') : '1';
         $this->load->library('pagination');
@@ -797,7 +806,7 @@ class Acladmin extends CI_Controller {
             if ($this->input->post('submit')) {
                 $valid = $this->form_validation;
                 $valid->set_rules('title', 'Judul', 'required');
-                $valid->set_rules('short_desc', 'Short Desc', 'required');
+                //$valid->set_rules('short_desc', 'Short Desc', 'required');
                 //$valid->set_rules('body', 'Isi', 'required');
 
                 if ($valid->run() == false) {
@@ -809,8 +818,8 @@ class Acladmin extends CI_Controller {
                         $data = array(
                             'id' => $id,
                             'title' => $this->input->post('title'),
-                            'short_desc' => $this->input->post('short_desc'),
-                            'body' => $this->input->post('body'),
+                            //'short_desc' => $this->input->post('short_desc'),
+                            //'body' => $this->input->post('body'),
                             'filename' => $format_upload,
                             //'headline'         => $this->input->post('headline') ? 1 : 0,
                             'permalink' => $permalink,
@@ -823,8 +832,8 @@ class Acladmin extends CI_Controller {
                         $data = array(
                             'id' => $id,
                             'title' => $this->input->post('title'),
-                            'short_desc' => $this->input->post('short_desc'),
-                            'body' => $this->input->post('body'),
+                            //'short_desc' => $this->input->post('short_desc'),
+                            //'body' => $this->input->post('body'),
                             //'headline'         => $this->input->post('headline'),
                             'permalink' => $permalink,
                             'modified_date' => time(),
@@ -1033,6 +1042,19 @@ class Acladmin extends CI_Controller {
                 if ($valid->run() == false) {
                     // show error in view
                 } else {
+                    $format_upload = $this->upload();
+                    if ($format_upload != "") {
+                        $data = array(
+                                'id' => $id,
+                                'title' => $this->input->post('title'),
+                                'body' => $this->input->post('body'),
+                                'filename' => $format_upload,
+                                'modified_date' => time(),
+                                'modified_by' => $this->sess_id,
+                                'status' => 1
+                            );
+                        $this->acladminmodel->updateProfile($data, $id);
+                    } else {
                         $data = array(
                                 'id' => $id,
                                 'title' => $this->input->post('title'),
@@ -1042,6 +1064,7 @@ class Acladmin extends CI_Controller {
                                 'status' => 1
                             );
                         $this->acladminmodel->updateProfile($data, $id);
+                    }
 
 //                    $gallery = $this->upload_gallery();
 //                    $this->acladminmodel->addGalleryArticle($gallery, $id);
@@ -1058,6 +1081,61 @@ class Acladmin extends CI_Controller {
             $this->load->view('acladmin/main', $data);
         } else {
             redirect('backend/acladmin/view_profile');
+        }
+    }
+
+    public function edit_contact() {
+        $id = $this->uri->segment(4);
+        if ($id) {
+            if ($this->input->post('submit')) {
+                $valid = $this->form_validation;
+                $valid->set_rules('alamat', 'Alamat', 'required');
+                $valid->set_rules('email', 'Email', 'required');
+                $valid->set_rules('telepon', 'Telepon', 'required');
+
+                if ($valid->run() == false) {
+                    // show error in view
+                } else {
+                    $format_upload = $this->upload();
+                    if ($format_upload != "") {
+                        $data = array(
+                                'id' => $id,
+                                'alamat' => $this->input->post('alamat'),
+                                'email' => $this->input->post('email'),
+                                'telepon' => $this->input->post('telepon'),
+                                'modified_date' => time(),
+                                'modified_by' => $this->sess_id,
+                                'status' => 1
+                            );
+                        $this->acladminmodel->updateContact($data, $id);
+                    } else {
+                        $data = array(
+                                'id' => $id,
+                                'alamat' => $this->input->post('alamat'),
+                                'email' => $this->input->post('email'),
+                                'telepon' => $this->input->post('telepon'),
+                                'modified_date' => time(),
+                                'modified_by' => $this->sess_id,
+                                'status' => 1
+                            );
+                        $this->acladminmodel->updateContact($data, $id);
+                    }
+
+//                    $gallery = $this->upload_gallery();
+//                    $this->acladminmodel->addGalleryArticle($gallery, $id);
+
+                    redirect('backend/acladmin/view_contact');
+                }
+            }
+            $data['page'] = 'edit_contact';
+            $data['title'] = 'Edit Contact';
+            $data['article'] = $this->acladminmodel->getIdContact($id);
+            //$data['photos']  = $this->acladminmodel->getIdGalleryArticle($id);
+
+            $data['content'] = $this->load->view('acladmin/module/edit_contact', $data, true);
+            $this->load->view('acladmin/main', $data);
+        } else {
+            redirect('backend/acladmin/view_contact');
         }
     }
 
@@ -1298,7 +1376,7 @@ class Acladmin extends CI_Controller {
                         $data = array(
                             'id' => $id,
                             'title' => $this->input->post('title'),
-                            //'link' => $this->input->post('link'),
+                            'link' => $this->input->post('link'),
                             'order_number' => $this->input->post('order_number'),
                             'filename' => $format_upload,
                             'permalink' => $permalink,
@@ -1311,7 +1389,7 @@ class Acladmin extends CI_Controller {
                         $data = array(
                             'id' => $id,
                             'title' => $this->input->post('title'),
-                            //'link' => $this->input->post('link'),
+                            'link' => $this->input->post('link'),
                             'order_number' => $this->input->post('order_number'),
                             'permalink' => $permalink,
                             'modified_date' => time(),

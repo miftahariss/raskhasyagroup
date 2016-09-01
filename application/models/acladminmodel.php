@@ -15,6 +15,7 @@ class Acladminmodel extends CI_Model {
         'kegiatan' => 'kegiatan',
         'mitra' => 'mitra',
         'profile' => 'profile',
+        'contact' => 'contact',
 
 
         'product_sub' => 'product_sub',
@@ -257,6 +258,19 @@ class Acladminmodel extends CI_Model {
     public function fetchProfile(){
         $this->db->select('*');
         $this->db->from($this->table['profile']);
+        $this->db->where('status', 1);
+        $this->db->order_by('id', 'DESC');
+
+        //$this->db->limit($limit, $start);
+        //$this->db->order_by('profil.id', 'desc');
+        $query = $this->db->get();
+
+        return $query->result();
+    }
+
+    public function fetchContact(){
+        $this->db->select('*');
+        $this->db->from($this->table['contact']);
         $this->db->where('status', 1);
         $this->db->order_by('id', 'DESC');
 
@@ -627,6 +641,11 @@ class Acladminmodel extends CI_Model {
         $this->db->update($this->table['profile'], $data);
     }
 
+    public function updateContact($data, $id) {
+        $this->db->where('id', $id);
+        $this->db->update($this->table['contact'], $data);
+    }
+
     public function updateProductGalleryFoto($data, $id) {
         $this->db->where('id', $id);
         $this->db->update($this->table['product_gallery_foto'], $data);
@@ -828,6 +847,13 @@ class Acladminmodel extends CI_Model {
     public function getIdProfile($id) {
         $this->db->where('id', $id);
         $query = $this->db->get($this->table['profile']);
+
+        return $query->row();
+    }
+
+    public function getIdContact($id) {
+        $this->db->where('id', $id);
+        $query = $this->db->get($this->table['contact']);
 
         return $query->row();
     }

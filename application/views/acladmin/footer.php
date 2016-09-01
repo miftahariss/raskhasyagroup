@@ -14,7 +14,7 @@
         <?php endif ?>
         <!-- Only Administrator -->
 
-        <span class="pull-right">&copy Raskhasya Group <?php echo date('Y') ?></span>
+        <span class="pull-right">&copy Powered By Lofty <?php echo date('Y') ?></span>
     </div>
     <hr/>
 </div>

@@ -21,20 +21,6 @@ function editPhoto() {
             </td>
         </tr>
         <tr>
-            <td>Short Desc</td>
-            <td>
-                <input type="text" name="short_desc" value="<?php echo $article->short_desc ?>" class="input input-block-level" />
-                <span class="alert-error"><?php echo form_error('short_desc')?></span>
-            </td>
-        </tr>
-        <tr>
-            <td>Isi</td>
-            <td>
-                <textarea type="text" name="body"><?php echo $article->body; ?></textarea>
-                <?php /* <span class="alert-error"><?php echo form_error('body')?></span> */ ?>
-            </td>
-        </tr>
-        <tr>
             <td>Foto <code>Maksimal 2MB</code></td>
             <td>
             	<?php if ($article->filename == 0): ?>

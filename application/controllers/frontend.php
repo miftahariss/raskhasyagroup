@@ -17,6 +17,8 @@ class Frontend extends CI_Controller {
         $data['category']           = $this->m_frontend->getCategory();
         $data['kegiatan']           = $this->m_frontend->getKegiatan();
         $data['mitra']              = $this->m_frontend->getMitra();
+        $data['profile']            = $this->m_frontend->getProfile();
+        $data['contact']            = $this->m_frontend->getContact();
 
         $data['mainpage']           = 'frontend/home';
         $this->load->view('frontend/templates', $data);
@@ -27,19 +29,19 @@ class Frontend extends CI_Controller {
         $data['base']                = $root;
         $limit                       = 24;
 
-        $categoryId                  = $this->m_frontend->getCategoryId($root);
+        $data['category_id']        = $this->m_frontend->getCategoryId($root);
         $data['category']            = $this->m_frontend->getCategory();
 
-        $this->updateCountCategory($categoryId[0]->id);
+        $this->updateCountCategory($data['category_id'][0]->id);
 
         $this->db->order_by('id', 'desc');
         $this->db->where('status', '1');
-        $this->db->where('id_category', $categoryId[0]->id);
+        $this->db->where('id_category', $data['category_id'][0]->id);
         $this->db->limit($limit, $this->uri->segment(3));
         $data['product']             = $this->db->get('product')->result();
 
         $this->db->where('status', '1');
-        $this->db->where('id_category', $categoryId[0]->id);
+        $this->db->where('id_category', $data['category_id'][0]->id);
         $data['total']               = $this->db->get('product')->num_rows();
 
         $this->load->library('pagination');
@@ -160,6 +162,7 @@ class Frontend extends CI_Controller {
         $data['base']               = 'Contact';
 
         $data['category']           = $this->m_frontend->getCategory();
+        $data['contact']            = $this->m_frontend->getContact();
 
         if ($this->input->post('submit')) {
             $valid = $this->form_validation;

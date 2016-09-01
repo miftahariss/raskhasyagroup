@@ -1,6 +1,6 @@
 <section class="section-produk bg-f7 pt30 pb30">
     <div class="container">
-        <h3 class="text-center mt0 "><span class="bg-title-produk">Produk Kami</span></h3>
+        <h3 class="text-center mt0 "><span class="bg-title-produk"><?php echo $category_id[0]->title; ?></span></h3>
         <div class="line-title"></div>
         <?php if ($product > 0): ?>
             <div class="row">

@@ -10,6 +10,13 @@
             </td>
         </tr>
         <tr>
+            <td>Link</td>
+            <td>
+                <input type="text" name="link" value="<?php echo $article->link; ?>" class="input input-block-level" />
+                <span class="alert-error"><?php echo form_error('link')?></span>
+            </td>
+        </tr>
+        <tr>
             <td>Slider Number</td>
             <td>
                 <input type="number" name="order_number" value="<?php echo $article->order_number ?>" class="input input-block-level" />

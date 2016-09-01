@@ -5,21 +5,17 @@
                 <div class="col-xs-6">
                     <img src="<?php echo base_url(); ?>assets/img/Logo-Raskhasya.png" alt="" class="logo-banner img-responsive">
                     <div class="bg-tipis kontak-banner">
-                        <p>Jalan Jenderal Sudirman Timur No.65 Jakarta Selatan</p>
-                        <p>Email: raskhasyagroup@gmail.com</p>
-                        <p>Telepon: 0812 1975 0000</p>
+                        <p><?php echo $contact[0]->alamat; ?></p>
+                        <p>Email: <?php echo $contact[0]->email; ?></p>
+                        <p>Telepon: <?php echo $contact[0]->telepon; ?></p>
                     </div>
                 </div>
 
                 <div class="col-xs-6">
                     <div class="bg-tipis mt20 compo-text">
 
-                        <h3 class="mt0 judul-compo-banner">Raskhasya Group</h3>
-                        <p class="mb10">Merupakan sebuah group yg terdiri dari para Arsitek, Ahli Sipil, Konsultan Perencana dan Konsultan Pengawas, Owner dari pemilik alat berat, Pemilik alat pendukung pekerjaan Konstruksi, Pemilik Precast, Pemilik Paving Block, Pemilik AMP Aspalt, Supplier Besar Readymix, Material Bangunan dan para tukang yang sudah profesional.</p>
-
-                        <p class="mb10">Group ini bergabung dengan tujuan untuk mempermudah pekerjaan kami, mempermudah pekerjaan pemerintah dan mempermudah pekerjaan para klien kami.</p>
-
-                        <p class="mb10">Bergabungnya kami dalam satu group akan memberikan dampak luar biasa pada kwalitas pekerjaan yang dipercayakan kepada kami. Dan dengan biaya yang lebih baik bagi semua rekanan kami.</p>
+                        <h3 class="mt0 judul-compo-banner"><?php echo $profile[0]->title ?></h3>
+                        <?php echo $profile[0]->body ?>
                     </div>
                 </div>
             </div>
@@ -30,7 +26,7 @@
             <?php if(isset($slider) && $slider != FALSE): ?>
                 <?php foreach($slider as $data): ?>
                     <div class="swiper-slide">
-                        <img class="img-responsive" src="<?php echo base_url() ?>asset_admin/assets/uploads/cover/original/<?php echo $data->filename; ?>" alt="<?php echo $data->title; ?>">
+                        <a href="<?php echo $data->link; ?>" target="_blank"><img class="img-responsive" src="<?php echo base_url() ?>asset_admin/assets/uploads/cover/original/<?php echo $data->filename; ?>" alt="<?php echo $data->title; ?>"></a>
                     </div>
                 <?php endforeach; ?>
             <?php endif; ?>

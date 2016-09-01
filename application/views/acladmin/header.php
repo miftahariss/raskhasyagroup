@@ -45,6 +45,12 @@
                         <li><a href="<?php echo base_url()?>backend/acladmin/view_profile"><span class="icon-list"></span> View Profile</a></li>
                     </ul>
                 </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contact <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="<?php echo base_url()?>backend/acladmin/view_contact"><span class="icon-list"></span> View Contact</a></li>
+                    </ul>
+                </li>
 
                 <!-- Only Administrator -->
                 <?php if( $this->session->userdata('role') == 1 ): ?>
