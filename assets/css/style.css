@@ -366,3 +366,21 @@ footer{
 .mCSB_draggerContainer{
   display: none;
 }
+
+.slider-banner .swiper-slide a img{
+    width: 100%;
+}
+
+.slider-banner .swiper-slide{
+  height: 400px;
+  overflow:hidden;
+}
+
+.list-produk .img img {
+    width: 100%;
+}
+
+.list-produk .img {
+    width: 100%;
+    height: 110px;
+}
