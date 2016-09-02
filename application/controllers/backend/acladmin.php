@@ -364,7 +364,7 @@ class Acladmin extends CI_Controller {
             } else {
 
                 $format_upload = $this->upload();
-                $video_id = $this->get_youtube_id_from_url($this->input->post('video_id'));
+                //$video_id = $this->get_youtube_id_from_url($this->input->post('video_id'));
                 $data = array(
                     'id_category' => $this->input->post('id_category'),
                     'title' => $this->input->post('title'),
@@ -813,7 +813,7 @@ class Acladmin extends CI_Controller {
                     // show error in view
                 } else {
                     $format_upload = $this->upload();
-                    $video_id = $this->get_youtube_id_from_url($this->input->post('video_id'));
+                    //$video_id = $this->get_youtube_id_from_url($this->input->post('video_id'));
                     if ($format_upload != "") {
                         $data = array(
                             'id' => $id,
