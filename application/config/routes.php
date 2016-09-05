@@ -40,7 +40,9 @@
 $route['backend'] 					= "backend/cmsauth";
 $route['category/(:any)'] 			= 'frontend/category';
 $route['category/(:any)/(:num)'] 	= "frontend/category";
-$route['produk/(:any)'] 			= 'frontend/produk';
+$route['produk']					= "frontend/produk";
+$route['produk/(:num)']				= "frontend/produk";
+$route['produk/(:any)'] 			= 'frontend/produkDetail';
 $route['kegiatan']					= 'frontend/kegiatan';
 $route['kegiatan/(:num)']			= 'frontend/kegiatan';
 $route['kegiatan/(:any)']			= 'frontend/kegiatanDetail';

@@ -48,10 +48,23 @@ class M_frontend extends CI_Model {
         return false;
     }
 
-    public function getProduct($id){
+    public function getProductCategory($id){
         $this->db->order_by('id', 'desc');
         $this->db->where('status', '1');
         $this->db->where('id_category', $id);
+        $query = $this->db->get('product');
+
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        }
+
+        return false;
+    }
+
+    public function getProduct(){
+        $this->db->order_by('id_category', 'asc');
+        $this->db->order_by('id', 'desc');
+        $this->db->where('status', '1');
         $query = $this->db->get('product');
 
         if ($query->num_rows() > 0) {

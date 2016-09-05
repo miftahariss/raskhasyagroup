@@ -15,6 +15,7 @@ class Frontend extends CI_Controller {
 
         $data['slider']             = $this->m_frontend->getSlider();
         $data['category']           = $this->m_frontend->getCategory();
+        $data['product']            = $this->m_frontend->getProduct();
         $data['kegiatan']           = $this->m_frontend->getKegiatan();
         $data['mitra']              = $this->m_frontend->getMitra();
         $data['profile']            = $this->m_frontend->getProfile();
@@ -77,6 +78,53 @@ class Frontend extends CI_Controller {
     }
 
     public function produk(){
+        $data['base']                = 'Produk';
+        $limit                       = 24;
+
+        $data['category']            = $this->m_frontend->getCategory();
+
+        $this->db->order_by('id_category', 'asc');
+        $this->db->order_by('id', 'desc');
+        $this->db->where('status', '1');
+        $this->db->limit($limit, $this->uri->segment(2));
+        $data['product']             = $this->db->get('product')->result();
+
+        $this->db->where('status', '1');
+        $data['total']               = $this->db->get('product')->num_rows();
+
+        $this->load->library('pagination');
+        $config['base_url']          = site_url('produk');
+        $config['total_rows']        = $data['total'];
+        $config['per_page']          = $limit;
+        $config['uri_segment']       = 2;
+        $config['num_links']         = 2;
+        $config['prev_link']         = '&laquo;';
+        $config['prev_tag_open']     = '<li><span><span aria-hidden="true">';
+        $config['prev_tag_close']    = '</span></span></li>';
+        $config['next_link']         = '»';
+        $config['next_tag_open']     = '<li><span aria-hidden="true">';
+        $config['next_tag_close']    = '</span></li>';
+        $config['last_link']         = '';
+        $config['last_tag_open']     = '';
+        $config['last_tag_close']    = '';
+        $config['first_link']        = '';
+        $config['first_tag_open']    = '';
+        $config['first_tag_close']   = '';
+        $config['num_tag_open']      = '<li><span>';
+        $config['num_tag_close']     = '</span></li>';
+        $config['cur_tag_open']      = '<li class="active"><span>';
+        $config['cur_tag_close']     = '<span class="sr-only">(current)</span></span></li>';
+        $config['full_tag_open']     = '<ul class="pagination pagination-sm">';
+        $config['full_tag_close']    = '</ul>';
+
+        $this->pagination->initialize($config);
+        $data['page_links'] = $this->pagination->create_links();
+
+        $data['mainpage']            = 'frontend/channel/produk';
+        $this->load->view('frontend/templates', $data);
+    }
+
+    public function produkDetail(){
         $data['base']                = 'Produk';
         $permalink                   = $this->uri->segment(2);
 

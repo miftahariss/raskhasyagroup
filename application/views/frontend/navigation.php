@@ -15,11 +15,15 @@
             <div class="container-navbar">
                 <ul class="nav navbar-nav">
                     <li <?php if($base == 'Home'): ?> class="first-child active" <?php endif; ?>><a href="<?php echo base_url(); ?>">HOME </a></li>
+                    <li <?php if($base == 'Kegiatan'): ?> class="first-child active" <?php endif; ?>><a href="<?php echo base_url(); ?>kegiatan">KEGIATAN </a></li>
                     <li <?php if($base == 'Profile'): ?> class="first-child active" <?php endif; ?>><a href="<?php echo base_url(); ?>profile">PROFILE</a></li>
+                    <?php /* ?>
+                    <li <?php if($base == 'Produk'): ?> class="first-child active" <?php endif; ?>><a href="<?php echo base_url(); ?>produk">PRODUK</a></li>
+                    <?php */ ?>
 
                     <?php if(isset($category) && $category != FALSE): ?>
                         <?php foreach($category as $data): ?>
-                            <?php $product = $this->m_frontend->getProduct($data->id); ?>
+                            <?php $product = $this->m_frontend->getProductCategory($data->id); ?>
                             <?php if(isset($product) && $product != FALSE): ?>
                                 <li class="dropdown">
                                     <a href="<?php echo base_url().'category/'.$data->permalink; ?>"><?php echo $data->title; ?> <span class="caret"></span></a>

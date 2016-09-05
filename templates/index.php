@@ -1,47 +1,162 @@
 <?php include "header.php";?>
     <section class="section-banner relative">
-        <div class="compo-banner">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-6">
-                        <img src="img/Logo-Raskhasya.png" alt="" class="logo-banner img-responsive">
-                        <div class="bg-tipis kontak-banner">
-                            <p>Jalan Jenderal Sudirman Timur No.65 Jakarta Selatan</p>
-                            <p>Email: raskhasyagroup@gmail.com</p>
-                            <p>Telepon: 0812 1975 0000</p>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-6">
-                        <div class="bg-tipis mt20 compo-text">
-
-                            <h3 class="mt0 judul-compo-banner">Raskhasya Group</h3>
-                            <p class="mb10">Merupakan sebuah group yg terdiri dari para Arsitek, Ahli Sipil, Konsultan Perencana dan Konsultan Pengawas, Owner dari pemilik alat berat, Pemilik alat pendukung pekerjaan Konstruksi, Pemilik Precast, Pemilik Paving Block, Pemilik AMP Aspalt, Supplier Besar Readymix, Material Bangunan dan para tukang yang sudah profesional.</p>
-
-                            <p class="mb10">Group ini bergabung dengan tujuan untuk mempermudah pekerjaan kami, mempermudah pekerjaan pemerintah dan mempermudah pekerjaan para klien kami.</p>
-
-                            <p class="mb10">Bergabungnya kami dalam satu group akan memberikan dampak luar biasa pada kwalitas pekerjaan yang dipercayakan kepada kami. Dan dengan biaya yang lebih baik bagi semua rekanan kami.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>    
-        </div>
+        
         <div class="swiper-container slider-banner">
             <div class="swiper-wrapper">
             <div class="swiper-slide">
+            <a href="">
+                <div class="compo-banner">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <img src="img/Logo-Raskhasya.png" alt="" class="logo-banner img-responsive">
+                                <div class="bg-tipis kontak-banner">
+                                    <p>Jalan Jenderal Sudirman Timur No.65 Jakarta Selatan</p>
+                                    <p>Email: raskhasyagroup@gmail.com</p>
+                                    <p>Telepon: 0812 1975 0000</p>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6">
+                                <div class="bg-tipis mt20 compo-text">
+
+                                    <h3 class="mt0 judul-compo-banner">Raskhasya Group</h3>
+                                    <p class="mb10">Merupakan sebuah group yg terdiri dari para Arsitek, Ahli Sipil, Konsultan Perencana dan Konsultan Pengawas, Owner dari pemilik alat berat, Pemilik alat pendukung pekerjaan Konstruksi, Pemilik Precast, Pemilik Paving Block, Pemilik AMP Aspalt, Supplier Besar Readymix, Material Bangunan dan para tukang yang sudah profesional.</p>
+
+                                    <p class="mb10">Group ini bergabung dengan tujuan untuk mempermudah pekerjaan kami, mempermudah pekerjaan pemerintah dan mempermudah pekerjaan para klien kami.</p>
+
+                                    <p class="mb10">Bergabungnya kami dalam satu group akan memberikan dampak luar biasa pada kwalitas pekerjaan yang dipercayakan kepada kami. Dan dengan biaya yang lebih baik bagi semua rekanan kami.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>    
+                </div>
                 <img class="img-responsive" src="img/slider.jpg" alt="">
+                </a>
             </div>
             <div class="swiper-slide">
+            <a href="">
+                <div class="compo-banner">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <img src="img/Logo-Raskhasya.png" alt="" class="logo-banner img-responsive">
+                                <div class="bg-tipis kontak-banner">
+                                    <p>Jalan Jenderal Sudirman Timur No.65 Jakarta Selatan</p>
+                                    <p>Email: raskhasyagroup@gmail.com</p>
+                                    <p>Telepon: 0812 1975 0000</p>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6">
+                                <div class="bg-tipis mt20 compo-text">
+
+                                    <h3 class="mt0 judul-compo-banner">Raskhasya Group</h3>
+                                    <p class="mb10">Merupakan sebuah group yg terdiri dari para Arsitek, Ahli Sipil, Konsultan Perencana dan Konsultan Pengawas, Owner dari pemilik alat berat, Pemilik alat pendukung pekerjaan Konstruksi, Pemilik Precast, Pemilik Paving Block, Pemilik AMP Aspalt, Supplier Besar Readymix, Material Bangunan dan para tukang yang sudah profesional.</p>
+
+                                    <p class="mb10">Group ini bergabung dengan tujuan untuk mempermudah pekerjaan kami, mempermudah pekerjaan pemerintah dan mempermudah pekerjaan para klien kami.</p>
+
+                                    <p class="mb10">Bergabungnya kami dalam satu group akan memberikan dampak luar biasa pada kwalitas pekerjaan yang dipercayakan kepada kami. Dan dengan biaya yang lebih baik bagi semua rekanan kami.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>    
+                </div>
                 <img class="img-responsive" src="img/slider.jpg" alt="">
+                </a>
             </div>
             <div class="swiper-slide">
+            <a href="">
+                <div class="compo-banner">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <img src="img/Logo-Raskhasya.png" alt="" class="logo-banner img-responsive">
+                                <div class="bg-tipis kontak-banner">
+                                    <p>Jalan Jenderal Sudirman Timur No.65 Jakarta Selatan</p>
+                                    <p>Email: raskhasyagroup@gmail.com</p>
+                                    <p>Telepon: 0812 1975 0000</p>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6">
+                                <div class="bg-tipis mt20 compo-text">
+
+                                    <h3 class="mt0 judul-compo-banner">Raskhasya Group</h3>
+                                    <p class="mb10">Merupakan sebuah group yg terdiri dari para Arsitek, Ahli Sipil, Konsultan Perencana dan Konsultan Pengawas, Owner dari pemilik alat berat, Pemilik alat pendukung pekerjaan Konstruksi, Pemilik Precast, Pemilik Paving Block, Pemilik AMP Aspalt, Supplier Besar Readymix, Material Bangunan dan para tukang yang sudah profesional.</p>
+
+                                    <p class="mb10">Group ini bergabung dengan tujuan untuk mempermudah pekerjaan kami, mempermudah pekerjaan pemerintah dan mempermudah pekerjaan para klien kami.</p>
+
+                                    <p class="mb10">Bergabungnya kami dalam satu group akan memberikan dampak luar biasa pada kwalitas pekerjaan yang dipercayakan kepada kami. Dan dengan biaya yang lebih baik bagi semua rekanan kami.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>    
+                </div>
                 <img class="img-responsive" src="img/slider.jpg" alt="">
+                </a>
             </div>
             <div class="swiper-slide">
+            <a href="">
+                <div class="compo-banner">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <img src="img/Logo-Raskhasya.png" alt="" class="logo-banner img-responsive">
+                                <div class="bg-tipis kontak-banner">
+                                    <p>Jalan Jenderal Sudirman Timur No.65 Jakarta Selatan</p>
+                                    <p>Email: raskhasyagroup@gmail.com</p>
+                                    <p>Telepon: 0812 1975 0000</p>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6">
+                                <div class="bg-tipis mt20 compo-text">
+
+                                    <h3 class="mt0 judul-compo-banner">Raskhasya Group</h3>
+                                    <p class="mb10">Merupakan sebuah group yg terdiri dari para Arsitek, Ahli Sipil, Konsultan Perencana dan Konsultan Pengawas, Owner dari pemilik alat berat, Pemilik alat pendukung pekerjaan Konstruksi, Pemilik Precast, Pemilik Paving Block, Pemilik AMP Aspalt, Supplier Besar Readymix, Material Bangunan dan para tukang yang sudah profesional.</p>
+
+                                    <p class="mb10">Group ini bergabung dengan tujuan untuk mempermudah pekerjaan kami, mempermudah pekerjaan pemerintah dan mempermudah pekerjaan para klien kami.</p>
+
+                                    <p class="mb10">Bergabungnya kami dalam satu group akan memberikan dampak luar biasa pada kwalitas pekerjaan yang dipercayakan kepada kami. Dan dengan biaya yang lebih baik bagi semua rekanan kami.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>    
+                </div>
                 <img class="img-responsive" src="img/slider.jpg" alt="">
+                </a>
             </div>
             <div class="swiper-slide">
+            <a href="">
+                <div class="compo-banner">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <img src="img/Logo-Raskhasya.png" alt="" class="logo-banner img-responsive">
+                                <div class="bg-tipis kontak-banner">
+                                    <p>Jalan Jenderal Sudirman Timur No.65 Jakarta Selatan</p>
+                                    <p>Email: raskhasyagroup@gmail.com</p>
+                                    <p>Telepon: 0812 1975 0000</p>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6">
+                                <div class="bg-tipis mt20 compo-text">
+
+                                    <h3 class="mt0 judul-compo-banner">Raskhasya Group</h3>
+                                    <p class="mb10">Merupakan sebuah group yg terdiri dari para Arsitek, Ahli Sipil, Konsultan Perencana dan Konsultan Pengawas, Owner dari pemilik alat berat, Pemilik alat pendukung pekerjaan Konstruksi, Pemilik Precast, Pemilik Paving Block, Pemilik AMP Aspalt, Supplier Besar Readymix, Material Bangunan dan para tukang yang sudah profesional.</p>
+
+                                    <p class="mb10">Group ini bergabung dengan tujuan untuk mempermudah pekerjaan kami, mempermudah pekerjaan pemerintah dan mempermudah pekerjaan para klien kami.</p>
+
+                                    <p class="mb10">Bergabungnya kami dalam satu group akan memberikan dampak luar biasa pada kwalitas pekerjaan yang dipercayakan kepada kami. Dan dengan biaya yang lebih baik bagi semua rekanan kami.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>    
+                </div>
                 <img class="img-responsive" src="img/slider.jpg" alt="">
+                </a>
             </div>
         </div>
          
@@ -331,7 +446,9 @@
                         </div>
                     </div>
                 </div>
-               
+            </div>
+            <div class="text-center mb30">
+                <a href="kegiatan.php" class="btn btn-primary">Lihat Semua Kegiatan</a>
             </div>
         </div>
     </section>

@@ -1,32 +1,34 @@
 <section class="section-banner relative">
-    <div class="compo-banner">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-6">
-                    <img src="<?php echo base_url(); ?>assets/img/Logo-Raskhasya.png" alt="" class="logo-banner img-responsive">
-                    <div class="bg-tipis kontak-banner">
-                        <p><?php echo $contact[0]->alamat; ?></p>
-                        <p>Email: <?php echo $contact[0]->email; ?></p>
-                        <p>Telepon: <?php echo $contact[0]->telepon; ?></p>
-                    </div>
-                </div>
-
-                <div class="col-xs-6">
-                    <div class="bg-tipis mt20 compo-text">
-
-                        <h3 class="mt0 judul-compo-banner"><?php echo $profile[0]->title ?></h3>
-                        <?php echo $profile[0]->body ?>
-                    </div>
-                </div>
-            </div>
-        </div>    
-    </div>
     <div class="swiper-container slider-banner">
         <div class="swiper-wrapper">
             <?php if(isset($slider) && $slider != FALSE): ?>
                 <?php foreach($slider as $data): ?>
                     <div class="swiper-slide">
-                        <a href="<?php echo $data->link; ?>" target="_blank"><img class="img-responsive" src="<?php echo base_url() ?>asset_admin/assets/uploads/cover/original/<?php echo $data->filename; ?>" alt="<?php echo $data->title; ?>"></a>
+                        <a href="<?php echo $data->link; ?>" target="_blank">
+                            <div class="compo-banner">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <img src="<?php echo base_url(); ?>assets/img/Logo-Raskhasya.png" alt="" class="logo-banner img-responsive">
+                                            <div class="bg-tipis kontak-banner">
+                                                <p><?php echo $contact[0]->alamat; ?></p>
+                                                <p>Email: <?php echo $contact[0]->email; ?></p>
+                                                <p>Telepon: <?php echo $contact[0]->telepon; ?></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-6">
+                                            <div class="bg-tipis mt20 compo-text">
+
+                                                <h3 class="mt0 judul-compo-banner"><?php echo $profile[0]->title ?></h3>
+                                                <?php echo $profile[0]->body ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>    
+                            </div>
+                            <img class="img-responsive" src="<?php echo base_url() ?>asset_admin/assets/uploads/cover/original/<?php echo $data->filename; ?>" alt="<?php echo $data->title; ?>">
+                        </a>
                     </div>
                 <?php endforeach; ?>
             <?php endif; ?>
@@ -43,11 +45,11 @@
         <h3 class="text-center mt0 "><span class="bg-title-produk">Produk Kami</span></h3>
         <div class="line-title"></div>
         <div class="row">
-            <?php if(isset($category) && $category != FALSE): ?>
-                <?php foreach($category as $data): ?>
+            <?php if(isset($product) && $product != FALSE): ?>
+                <?php foreach($product as $data): ?>
                     <div class="col-xs-2">
                         <div class="list-produk">
-                            <a href="<?php echo base_url().'category/'.$data->permalink; ?>">
+                            <a href="<?php echo base_url().'produk/'.$data->permalink; ?>">
                                 <div class="img">
                                     <img src="<?php echo base_url() ?>asset_admin/assets/uploads/cover/medium/<?php echo $data->filename; ?>" class="img-responsive" alt="">
                                 </div>
