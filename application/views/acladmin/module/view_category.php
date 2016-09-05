@@ -14,6 +14,7 @@
         <th>ID</th>
         <th>Title</th>
         <th>Photo</th>
+        <th>Menu</th>
         <th>Hits</th>
         <th>Created Date</th>
         <th>Modified Date</th>
@@ -30,6 +31,14 @@
             	<?php else: ?>
             		<img class="thumbnail" src="<?php echo base_url()?>asset_admin/assets/uploads/cover/small/<?php echo $r->filename?>" width="70" />
             	<?php endif; ?>
+            </td>
+             <td>
+                <small>
+                    <?php
+                        $menu = $this->acladminmodel->getIdMenu($r->id_menu);
+                        echo $menu->title;
+                    ?>
+                </small>
             </td>
             <td>
                 <small>

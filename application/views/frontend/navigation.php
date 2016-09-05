@@ -21,7 +21,13 @@
                     <li <?php if($base == 'Produk'): ?> class="first-child active" <?php endif; ?>><a href="<?php echo base_url(); ?>produk">PRODUK</a></li>
                     <?php */ ?>
 
-                    <?php if(isset($category) && $category != FALSE): ?>
+                    <?php if(isset($menu) && $menu != FALSE): ?>
+                        <?php foreach($menu as $data): ?>
+                            <li <?php if($base == $data->permalink): ?> class="first-child active" <?php endif; ?>><a href="<?php echo base_url().'kanal/'.$data->permalink; ?>"><?php echo $data->title; ?></a></li>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+
+                    <?php /* if(isset($category) && $category != FALSE): ?>
                         <?php foreach($category as $data): ?>
                             <?php $product = $this->m_frontend->getProductCategory($data->id); ?>
                             <?php if(isset($product) && $product != FALSE): ?>
@@ -37,7 +43,7 @@
                                 <li <?php if($base == $data->permalink): ?> class="first-child active" <?php endif; ?>><a href="<?php echo base_url().'category/'.$data->permalink; ?>"><?php echo $data->title; ?></a></li>
                             <?php endif; ?>
                         <?php endforeach; ?>
-                    <?php endif; ?>
+                    <?php endif; */ ?>
                     <li <?php if($base == 'Contact'): ?> class="first-child active" <?php endif; ?>><a href="<?php echo base_url(); ?>hubungi-kami">HUBUNGI KAMI</a></li>
                 </ul>
             </div> <!-- end of container-navbar -->

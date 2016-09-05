@@ -23,6 +23,44 @@ class M_frontend extends CI_Model {
         return false;
     }
 
+    public function getMenu(){
+        $this->db->order_by('id', 'asc');
+        $this->db->where('status', '1');
+        $query = $this->db->get('menu');
+
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        }
+
+        return false;
+    }
+
+    public function getCategoryByIdMenu($id){
+        $this->db->order_by('id', 'desc');
+        $this->db->where('id_menu', $id);
+        $this->db->where('status', '1');
+        $query = $this->db->get('category');
+
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        }
+
+        return false;
+    }
+
+    public function getMenuId($permalink){
+        $this->db->select('id, title');
+        $this->db->where('status', '1');
+        $this->db->where('permalink', $permalink);
+        $query = $this->db->get('menu');
+
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        }
+
+        return false;
+    }
+
     public function getCategory(){
         $this->db->order_by('id', 'asc');
         $this->db->where('status', '1');

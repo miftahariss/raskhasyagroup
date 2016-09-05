@@ -16,6 +16,7 @@ class Acladminmodel extends CI_Model {
         'mitra' => 'mitra',
         'profile' => 'profile',
         'contact' => 'contact',
+        'menu' => 'menu',
 
 
         'product_sub' => 'product_sub',
@@ -195,6 +196,17 @@ class Acladminmodel extends CI_Model {
      * @param type $start
      * @return boolean
      */
+
+    public function fetchMenu() {
+        $this->db->select('*');
+        $this->db->from($this->table['menu']);
+        $this->db->where('status', 1);
+
+        $this->db->order_by('id', 'asc');
+        $query = $this->db->get();
+
+        return $query->result();
+    }
     
     public function fetchCategory($limit, $start) {
         $this->db->select('*');
@@ -815,6 +827,13 @@ class Acladminmodel extends CI_Model {
      * @param type $id
      * @return type array
      */
+
+    public function getIdMenu($id){
+        $this->db->where('id', $id);
+        $query = $this->db->get($this->table['menu']);
+
+        return $query->row();
+    }
     
     public function getIdCategory($id) {
         $this->db->where('id', $id);

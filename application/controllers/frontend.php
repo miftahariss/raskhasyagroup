@@ -14,8 +14,19 @@ class Frontend extends CI_Controller {
     	$data['base']               = 'Home';
 
         $data['slider']             = $this->m_frontend->getSlider();
-        $data['category']           = $this->m_frontend->getCategory();
-        $data['product']            = $this->m_frontend->getProduct();
+        $data['menu']               = $this->m_frontend->getMenu();
+        $data['content_arsitektur'] = $this->m_frontend->getCategoryByIdMenu(1);
+        $data['content_sipil']      = $this->m_frontend->getCategoryByIdMenu(2);
+        $data['content_alatberat']  = $this->m_frontend->getCategoryByIdMenu(3);
+        $data['content_material']   = $this->m_frontend->getCategoryByIdMenu(4);
+        $data['content_teknologi']  = $this->m_frontend->getCategoryByIdMenu(5);
+        $data['content_lainlain']   = $this->m_frontend->getCategoryByIdMenu(6);
+
+
+        //$data['category']           = $this->m_frontend->getCategory();
+        //$data['product']            = $this->m_frontend->getProduct();
+
+
         $data['kegiatan']           = $this->m_frontend->getKegiatan();
         $data['mitra']              = $this->m_frontend->getMitra();
         $data['profile']            = $this->m_frontend->getProfile();
@@ -25,13 +36,65 @@ class Frontend extends CI_Controller {
         $this->load->view('frontend/templates', $data);
     }
 
+    public function kanal(){
+        $root                        = $this->uri->segment(2);
+        $data['base']                = $root;
+        $limit                       = 24;
+
+        $data['menu_id']             = $this->m_frontend->getMenuId($root);
+        $data['menu']                = $this->m_frontend->getMenu();
+        //$data['category']           = $this->m_frontend->getCategory();
+
+        $this->db->order_by('id', 'desc');
+        $this->db->where('status', '1');
+        $this->db->where('id_menu', $data['menu_id'][0]->id);
+        $this->db->limit($limit, $this->uri->segment(3));
+        $data['category']            = $this->db->get('category')->result();
+
+        $this->db->where('status', '1');
+        $this->db->where('id_menu', $data['menu_id'][0]->id);
+        $data['total']               = $this->db->get('category')->num_rows();
+
+        $this->load->library('pagination');
+        $config['base_url']          = site_url('kanal/'.$root);
+        $config['total_rows']        = $data['total'];
+        $config['per_page']          = $limit;
+        $config['uri_segment']       = 3;
+        $config['num_links']         = 2;
+        $config['prev_link']         = '&laquo;';
+        $config['prev_tag_open']     = '<li><span><span aria-hidden="true">';
+        $config['prev_tag_close']    = '</span></span></li>';
+        $config['next_link']         = '»';
+        $config['next_tag_open']     = '<li><span aria-hidden="true">';
+        $config['next_tag_close']    = '</span></li>';
+        $config['last_link']         = '';
+        $config['last_tag_open']     = '';
+        $config['last_tag_close']    = '';
+        $config['first_link']        = '';
+        $config['first_tag_open']    = '';
+        $config['first_tag_close']   = '';
+        $config['num_tag_open']      = '<li><span>';
+        $config['num_tag_close']     = '</span></li>';
+        $config['cur_tag_open']      = '<li class="active"><span>';
+        $config['cur_tag_close']     = '<span class="sr-only">(current)</span></span></li>';
+        $config['full_tag_open']     = '<ul class="pagination pagination-sm">';
+        $config['full_tag_close']    = '</ul>';
+
+        $this->pagination->initialize($config);
+        $data['page_links'] = $this->pagination->create_links();
+
+        $data['mainpage']            = 'frontend/channel/kanal';
+        $this->load->view('frontend/templates', $data);
+    }
+
     public function category(){
         $root                        = $this->uri->segment(2);
         $data['base']                = $root;
         $limit                       = 24;
 
         $data['category_id']        = $this->m_frontend->getCategoryId($root);
-        $data['category']            = $this->m_frontend->getCategory();
+        $data['menu']               = $this->m_frontend->getMenu();
+        //$data['category']           = $this->m_frontend->getCategory();
 
         $this->updateCountCategory($data['category_id'][0]->id);
 
@@ -77,11 +140,13 @@ class Frontend extends CI_Controller {
         $this->load->view('frontend/templates', $data);
     }
 
+    /* kanal produk gatau dipake apa engga */
     public function produk(){
         $data['base']                = 'Produk';
         $limit                       = 24;
 
-        $data['category']            = $this->m_frontend->getCategory();
+        //$data['category']            = $this->m_frontend->getCategory();
+        $data['menu']                = $this->m_frontend->getMenu();
 
         $this->db->order_by('id_category', 'asc');
         $this->db->order_by('id', 'desc');
@@ -128,7 +193,8 @@ class Frontend extends CI_Controller {
         $data['base']                = 'Produk';
         $permalink                   = $this->uri->segment(2);
 
-        $data['category']            = $this->m_frontend->getCategory();
+        $data['menu']                = $this->m_frontend->getMenu();
+        //$data['category']            = $this->m_frontend->getCategory();
         $data['detail']              = $this->m_frontend->getProductDetail($permalink);
 
         $this->updateCountProduct($data['detail'][0]->id);
@@ -141,7 +207,8 @@ class Frontend extends CI_Controller {
         $data['base']                = 'Kegiatan';
         $limit                       = 6;
 
-        $data['category']            = $this->m_frontend->getCategory();
+        $data['menu']                = $this->m_frontend->getMenu();
+        //$data['category']            = $this->m_frontend->getCategory();
 
         $this->db->order_by('id', 'desc');
         $this->db->where('status', '1');
@@ -187,7 +254,8 @@ class Frontend extends CI_Controller {
         $data['base']                = 'Kegiatan';
         $permalink                   = $this->uri->segment(2);
 
-        $data['category']            = $this->m_frontend->getCategory();
+        $data['menu']                = $this->m_frontend->getMenu();
+        //$data['category']            = $this->m_frontend->getCategory();
         $data['detail']              = $this->m_frontend->getKegiatanDetail($permalink);
 
         $this->updateCountKegiatan($data['detail'][0]->id);
@@ -199,7 +267,8 @@ class Frontend extends CI_Controller {
     public function profile(){
         $data['base']               = 'Profile';
 
-        $data['category']           = $this->m_frontend->getCategory();
+        $data['menu']               = $this->m_frontend->getMenu();
+        //$data['category']           = $this->m_frontend->getCategory();
         $data['profile']            = $this->m_frontend->getProfile();
 
         $data['mainpage']           = 'frontend/channel/profile';
@@ -209,7 +278,8 @@ class Frontend extends CI_Controller {
     public function contactus(){
         $data['base']               = 'Contact';
 
-        $data['category']           = $this->m_frontend->getCategory();
+        $data['menu']               = $this->m_frontend->getMenu();
+        //$data['category']           = $this->m_frontend->getCategory();
         $data['contact']            = $this->m_frontend->getContact();
 
         if ($this->input->post('submit')) {

@@ -38,6 +38,8 @@
 |
 */
 $route['backend'] 					= "backend/cmsauth";
+$route['kanal/(:any)'] 				= 'frontend/kanal';
+$route['kanal/(:any)/(:num)'] 		= "frontend/kanal";
 $route['category/(:any)'] 			= 'frontend/category';
 $route['category/(:any)/(:num)'] 	= "frontend/category";
 $route['produk']					= "frontend/produk";

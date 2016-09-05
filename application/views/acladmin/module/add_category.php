@@ -21,6 +21,21 @@
             </td>
         </tr>
         <tr>
+            <td>Menu</td>
+            <td>
+                <select name="id_menu" required>
+                    <option value="">-- Choose Menu --</option>
+                    <?php
+                        $sub = $this->acladminmodel->fetchMenu();
+                        foreach($sub as $value):
+                    ?>
+                    <option value="<?php echo $value->id; ?>"><?php echo $value->title; ?></option>
+                    <?php endforeach; ?>
+                </select>
+                <span class="alert-error"><?php echo form_error('id_menu')?></span>
+            </td>
+        </tr>
+        <tr>
             <td>Foto Utama<code>Maksimal 2MB</code></td>
             <td>
                 <input type="file" name="userfile" required="required" /><code>minimum file dimension 200 x 300 pixel</code>

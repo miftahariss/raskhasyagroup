@@ -309,6 +309,7 @@ class Acladmin extends CI_Controller {
             // validation
             $valid = $this->form_validation;
             $valid->set_rules('title', 'Judul', 'required');
+            $valid->set_rules('id_menu', 'Menu', 'required');
             //$valid->set_rules('short_desc', 'Short Desc', 'required');
             //$valid->set_rules('body', 'Isi', 'required');
             if (isset($_FILES['userfile']['name']) && $_FILES['userfile']['name'] == "") {
@@ -321,6 +322,7 @@ class Acladmin extends CI_Controller {
 
                 $format_upload = $this->upload();
                 $data = array(
+                    'id_menu' => $this->input->post('id_menu'),
                     'title' => $this->input->post('title'),
                     //'short_desc' => $this->input->post('short_desc'),
                     //'body' => $this->input->post('body'),
@@ -806,6 +808,7 @@ class Acladmin extends CI_Controller {
             if ($this->input->post('submit')) {
                 $valid = $this->form_validation;
                 $valid->set_rules('title', 'Judul', 'required');
+                $valid->set_rules('id_menu', 'Menu', 'required');
                 //$valid->set_rules('short_desc', 'Short Desc', 'required');
                 //$valid->set_rules('body', 'Isi', 'required');
 
@@ -817,6 +820,7 @@ class Acladmin extends CI_Controller {
                     if ($format_upload != "") {
                         $data = array(
                             'id' => $id,
+                            'id_menu' => $this->input->post('id_menu'),
                             'title' => $this->input->post('title'),
                             //'short_desc' => $this->input->post('short_desc'),
                             //'body' => $this->input->post('body'),
@@ -831,6 +835,7 @@ class Acladmin extends CI_Controller {
                     } else {
                         $data = array(
                             'id' => $id,
+                            'id_menu' => $this->input->post('id_menu'),
                             'title' => $this->input->post('title'),
                             //'short_desc' => $this->input->post('short_desc'),
                             //'body' => $this->input->post('body'),

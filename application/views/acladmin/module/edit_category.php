@@ -21,6 +21,21 @@ function editPhoto() {
             </td>
         </tr>
         <tr>
+            <td>Category</td>
+            <td>
+                <select name="id_menu" required>
+                    <option value="">-- Menu --</option>
+                    <?php
+                        $category = $this->acladminmodel->fetchMenu();
+                        foreach($category as $value):
+                    ?>
+                    <option value="<?php echo $value->id; ?>" <?php if($article->id_menu == $value->id) echo "selected"; ?>><?php echo $value->title; ?></option>
+                    <?php endforeach; ?>
+                </select>
+                <span class="alert-error"><?php echo form_error('id_menu')?></span>
+            </td>
+        </tr>
+        <tr>
             <td>Foto <code>Maksimal 2MB</code></td>
             <td>
             	<?php if ($article->filename == 0): ?>

@@ -45,11 +45,111 @@
         <h3 class="text-center mt0 "><span class="bg-title-produk">Produk Kami</span></h3>
         <div class="line-title"></div>
         <div class="row">
-            <?php if(isset($product) && $product != FALSE): ?>
-                <?php foreach($product as $data): ?>
+            <?php if(isset($content_arsitektur) && $content_arsitektur != FALSE): ?>
+                <?php foreach($content_arsitektur as $data): ?>
                     <div class="col-xs-2">
                         <div class="list-produk">
-                            <a href="<?php echo base_url().'produk/'.$data->permalink; ?>">
+                            <a href="<?php echo base_url().'category/'.$data->permalink; ?>">
+                                <div class="img">
+                                    <img src="<?php echo base_url() ?>asset_admin/assets/uploads/cover/medium/<?php echo $data->filename; ?>" class="img-responsive" alt="">
+                                </div>
+                                <div class="desc p10">
+                                    <div class="name">
+                                        <p class="mb0"><?php echo $data->title; ?></p>
+                                    </div>
+                                    
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+
+            <?php if(isset($content_sipil) && $content_sipil != FALSE): ?>
+                <?php foreach($content_sipil as $data): ?>
+                    <div class="col-xs-2">
+                        <div class="list-produk">
+                            <a href="<?php echo base_url().'category/'.$data->permalink; ?>">
+                                <div class="img">
+                                    <img src="<?php echo base_url() ?>asset_admin/assets/uploads/cover/medium/<?php echo $data->filename; ?>" class="img-responsive" alt="">
+                                </div>
+                                <div class="desc p10">
+                                    <div class="name">
+                                        <p class="mb0"><?php echo $data->title; ?></p>
+                                    </div>
+                                    
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+
+            <?php if(isset($content_alatberat) && $content_alatberat != FALSE): ?>
+                <?php foreach($content_alatberat as $data): ?>
+                    <div class="col-xs-2">
+                        <div class="list-produk">
+                            <a href="<?php echo base_url().'category/'.$data->permalink; ?>">
+                                <div class="img">
+                                    <img src="<?php echo base_url() ?>asset_admin/assets/uploads/cover/medium/<?php echo $data->filename; ?>" class="img-responsive" alt="">
+                                </div>
+                                <div class="desc p10">
+                                    <div class="name">
+                                        <p class="mb0"><?php echo $data->title; ?></p>
+                                    </div>
+                                    
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+
+            <?php if(isset($content_material) && $content_material != FALSE): ?>
+                <?php foreach($content_material as $data): ?>
+                    <div class="col-xs-2">
+                        <div class="list-produk">
+                            <a href="<?php echo base_url().'category/'.$data->permalink; ?>">
+                                <div class="img">
+                                    <img src="<?php echo base_url() ?>asset_admin/assets/uploads/cover/medium/<?php echo $data->filename; ?>" class="img-responsive" alt="">
+                                </div>
+                                <div class="desc p10">
+                                    <div class="name">
+                                        <p class="mb0"><?php echo $data->title; ?></p>
+                                    </div>
+                                    
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+
+            <?php if(isset($content_teknologi) && $content_teknologi != FALSE): ?>
+                <?php foreach($content_teknologi as $data): ?>
+                    <div class="col-xs-2">
+                        <div class="list-produk">
+                            <a href="<?php echo base_url().'category/'.$data->permalink; ?>">
+                                <div class="img">
+                                    <img src="<?php echo base_url() ?>asset_admin/assets/uploads/cover/medium/<?php echo $data->filename; ?>" class="img-responsive" alt="">
+                                </div>
+                                <div class="desc p10">
+                                    <div class="name">
+                                        <p class="mb0"><?php echo $data->title; ?></p>
+                                    </div>
+                                    
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+
+            <?php if(isset($content_lainlain) && $content_lainlain != FALSE): ?>
+                <?php foreach($content_lainlain as $data): ?>
+                    <div class="col-xs-2">
+                        <div class="list-produk">
+                            <a href="<?php echo base_url().'category/'.$data->permalink; ?>">
                                 <div class="img">
                                     <img src="<?php echo base_url() ?>asset_admin/assets/uploads/cover/medium/<?php echo $data->filename; ?>" class="img-responsive" alt="">
                                 </div>
