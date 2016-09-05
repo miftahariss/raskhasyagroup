@@ -6,7 +6,7 @@
             <div class="row">
                 <?php foreach($kegiatan as $data): ?>
                     <div class="col-xs-6">
-                        <div class="media mb20">
+                        <div class="media mb20 list-kegiatan">
                             <div class="media-left">
                                 <a href="<?php echo base_url().'kegiatan/'.$data->permalink; ?>">
                                   <img class="media-object mr10" width="100" src="<?php echo base_url() ?>asset_admin/assets/uploads/cover/medium/<?php echo $data->filename; ?>" alt="<?php echo $data->title; ?>" >
@@ -14,7 +14,8 @@
                             </div>
                             <div class="media-body">
                                 <h4 class="media-heading"><a href="<?php echo base_url().'kegiatan/'.$data->permalink; ?>"><?php echo $data->title; ?></a></h4>
-                                <p><?php echo $data->short_desc; ?>
+                                <p><?php echo substr($data->short_desc, 0, 184) . '...'; ?>
+                            </div>
                         </div>
                     </div>
                 <?php endforeach; ?>

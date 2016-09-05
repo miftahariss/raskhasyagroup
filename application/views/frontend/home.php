@@ -85,7 +85,7 @@
                             </div>
                             <div class="media-body">
                                 <h4 class="media-heading"><a href="<?php echo base_url().'kegiatan/'.$data->permalink; ?>"><?php echo $data->title; ?></a></h4>
-                                <p><?php echo $data->short_desc; ?></p>
+                                <p><?php echo substr($data->short_desc, 0, 184) . '...'; ?></p>
                             </div>
                         </div>
                     <?php endforeach; ?>
