@@ -23,7 +23,19 @@
 
                     <?php if(isset($menu) && $menu != FALSE): ?>
                         <?php foreach($menu as $data): ?>
-                            <li <?php if($base == $data->permalink): ?> class="first-child active" <?php endif; ?>><a href="<?php echo base_url().'kanal/'.$data->permalink; ?>"><?php echo $data->title; ?></a></li>
+                            <?php $category = $this->m_frontend->getCategoryByIdMenu($data->id); ?>
+                            <?php if(isset($category) && $category != FALSE): ?>
+                                <li class="dropdown">
+                                    <a href="<?php echo base_url().'kanal/'.$data->permalink; ?>"><?php echo $data->title; ?> <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <?php foreach($category as $value): ?>
+                                            <li><a href="<?php echo base_url().'category/'.$value->permalink; ?>"><?php echo $value->title; ?></a></li>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                </li>
+                            <?php else: ?>
+                                <li <?php if($base == $data->permalink): ?> class="first-child active" <?php endif; ?>><a href="<?php echo base_url().'kanal/'.$data->permalink; ?>"><?php echo $data->title; ?></a></li>
+                            <?php endif; ?>
                         <?php endforeach; ?>
                     <?php endif; ?>
 
@@ -44,7 +56,7 @@
                             <?php endif; ?>
                         <?php endforeach; ?>
                     <?php endif; */ ?>
-                    <li <?php if($base == 'Contact'): ?> class="first-child active" <?php endif; ?>><a href="<?php echo base_url(); ?>hubungi-kami">HUBUNGI KAMI</a></li>
+                    <li <?php if($base == 'Contact'): ?> class="first-child active" <?php endif; ?>><a href="<?php echo base_url(); ?>hubungi-kami">KONTAK</a></li>
                 </ul>
             </div> <!-- end of container-navbar -->
         </div><!-- /.navbar-collapse -->
