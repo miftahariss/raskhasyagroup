@@ -12,7 +12,7 @@
                                             <img src="<?php echo base_url(); ?>assets/img/Logo-Raskhasya.png" alt="" class="logo-banner img-responsive">
                                             <div class="bg-tipis kontak-banner">
                                                 <p><?php echo $contact[0]->alamat; ?></p>
-                                                <p>Email: <?php echo $contact[0]->email; ?></p>
+                                                <p><?php echo $contact[0]->email; ?></p>
                                                 <p>Telepon: <?php echo $contact[0]->telepon; ?></p>
                                             </div>
                                         </div>
@@ -27,7 +27,7 @@
                                     </div>
                                 </div>    
                             </div>
-                            <img class="img-responsive" src="<?php echo base_url() ?>asset_admin/assets/uploads/cover/original/<?php echo $data->filename; ?>" alt="<?php echo $data->title; ?>">
+                            <img class="img-responsive img-slider" src="<?php echo base_url() ?>asset_admin/assets/uploads/cover/original/<?php echo $data->filename; ?>" alt="<?php echo $data->title; ?>">
                         </a>
                     </div>
                 <?php endforeach; ?>
@@ -40,11 +40,12 @@
     <div class="swiper-button-next"></div>
 </section>
 
-<section class="section-produk bg-f7 pt30 pb30">
+<section class="section-produk bg-f7 pt10 pb20">
     <div class="container">
-        <h3 class="text-center mt0 "><span class="bg-title-produk">Produk Kami</span></h3>
+        <h3 class="text-center mt0 mb0"><span class="bg-title-produk">Produk Kami</span></h3>
         <div class="line-title"></div>
         <div class="row">
+            <h3 class="fs18 ml15 mt0 mb10 subtitle-home">ARSITEKTUR</h3>
             <?php if(isset($content_arsitektur) && $content_arsitektur != FALSE): ?>
                 <?php foreach($content_arsitektur as $data): ?>
                     <div class="col-xs-2">
@@ -64,7 +65,9 @@
                     </div>
                 <?php endforeach; ?>
             <?php endif; ?>
+            <div class="clearfix"></div>
 
+            <h3 class="fs18 ml15 mt0 mb10 subtitle-home">SIPIL</h3>
             <?php if(isset($content_sipil) && $content_sipil != FALSE): ?>
                 <?php foreach($content_sipil as $data): ?>
                     <div class="col-xs-2">
@@ -84,7 +87,9 @@
                     </div>
                 <?php endforeach; ?>
             <?php endif; ?>
+            <div class="clearfix"></div>
 
+            <h3 class="fs18 ml15 mt0 mb10 subtitle-home">ALAT BERAT & PENDUKUNG</h3>
             <?php if(isset($content_alatberat) && $content_alatberat != FALSE): ?>
                 <?php foreach($content_alatberat as $data): ?>
                     <div class="col-xs-2">
@@ -104,7 +109,9 @@
                     </div>
                 <?php endforeach; ?>
             <?php endif; ?>
+            <div class="clearfix"></div>
 
+            <h3 class="fs18 ml15 mt0 mb10 subtitle-home">MATERIAL</h3>
             <?php if(isset($content_material) && $content_material != FALSE): ?>
                 <?php foreach($content_material as $data): ?>
                     <div class="col-xs-2">
@@ -124,9 +131,11 @@
                     </div>
                 <?php endforeach; ?>
             <?php endif; ?>
+            <div class="clearfix"></div>
 
-            <?php if(isset($content_teknologi) && $content_teknologi != FALSE): ?>
-                <?php foreach($content_teknologi as $data): ?>
+            <h3 class="fs18 ml15 mt0 mb10 subtitle-home">PRECAST</h3>
+            <?php if(isset($content_precast) && $content_precast != FALSE): ?>
+                <?php foreach($content_precast as $data): ?>
                     <div class="col-xs-2">
                         <div class="list-produk">
                             <a href="<?php echo base_url().'category/'.$data->permalink; ?>">
@@ -144,9 +153,11 @@
                     </div>
                 <?php endforeach; ?>
             <?php endif; ?>
+            <div class="clearfix"></div>
 
-            <?php if(isset($content_lainlain) && $content_lainlain != FALSE): ?>
-                <?php foreach($content_lainlain as $data): ?>
+            <h3 class="fs18 ml15 mt0 mb10 subtitle-home">TEKNOLOGI</h3>
+            <?php if(isset($content_teknologi) && $content_teknologi != FALSE): ?>
+                <?php foreach($content_teknologi as $data): ?>
                     <div class="col-xs-2">
                         <div class="list-produk">
                             <a href="<?php echo base_url().'category/'.$data->permalink; ?>">
@@ -172,12 +183,12 @@
 <section class="baris">
     <div class="container">
         <h3 class="text-center mt30 "><span class="bg-title-putih">Kegiatan</span></h3>
-        <div class="line-title"></div>
-        <div class="row">
-            <div class="col-xs-6">
-                <?php if(isset($kegiatan) && $kegiatan != FALSE): ?>
-                    <?php foreach($kegiatan as $data): ?>
-                        <div class="media mb20">
+        <div class="line-title line-title-kegiatan"></div>
+        <div class="row mt40">
+            <?php if(isset($kegiatan) && $kegiatan != FALSE): ?>
+                <?php foreach($kegiatan as $data): ?>
+                    <div class="col-xs-6">
+                        <div class="media mb20 list-kegiatan">
                             <div class="media-left">
                                 <a href="<?php echo base_url().'kegiatan/'.$data->permalink; ?>">
                                   <img class="media-object mr10" width="100" src="<?php echo base_url() ?>asset_admin/assets/uploads/cover/medium/<?php echo $data->filename; ?>" alt="<?php echo $data->title; ?>" >
@@ -188,9 +199,9 @@
                                 <p><?php echo substr($data->short_desc, 0, 184) . '...'; ?></p>
                             </div>
                         </div>
-                    <?php endforeach; ?>
-                <?php endif; ?>
-            </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </div>
         <div class="text-center mb30">
             <a href="<?php echo base_url(); ?>kegiatan" class="btn btn-primary">Lihat Semua Kegiatan</a>
@@ -199,7 +210,7 @@
 </section>
 
 
-<section class="section-customer pt30 pb30">
+<section class="section-customer pt20 pb20">
     <div class="container">
         <h3 class="text-center mt0 "><span class="bg-title-customer">Mitra</span></h3>
         <div class="line-title line-title-customer"></div>

@@ -26,38 +26,13 @@
         prevButton: '.swiper-button-prev',
         autoplay:4000,
         onInit:function(){
-            var tinggislide = $('.section-banner').height()-60;
+            var tinggislide = $('.section-banner').height()-30;
             $('.compo-text').css('max-height',tinggislide);
             $('.logo-banner').width(300);
             $('.kontak-banner').css('margin-top','20px');
         }
     });
 
-
-    // $('.navbar-nav .dropdown').on('click',function(){
-    //     var marlef = $(this).siblings('.first-child').position().left;
-
-    //     if($(this).hasClass('open')){
-    //         $('.navbar-nav').removeAttr('style');
-    //     }
-    //     else{
-    //         $('.navbar-nav').height(300);
-    //     }
-    // });
-
-    // var marlef = $('.navbar-nav .first-child').position().left;
-    // $('.right-nav').on('click',function(e){
-
-    //     $('.navbar-nav ').animate({
-    //         scrollLeft:600 
-    //     },500);
-        
-    // });
-    // $('.left-nav').on('click',function(){
-    //     $('.navbar-nav ').animate({
-    //         scrollLeft:-400
-    //     },500);
-    // });
 
     
     $(document).ready(function(){
@@ -79,7 +54,7 @@
                 $('.logo-banner').width(500);
             }
             else{
-                var tinggislide = $('.section-banner').height()-60;
+                var tinggislide = $('.section-banner').height()-30;
                 $('.compo-text').css('max-height',tinggislide);
                 $('.logo-banner').width(300);
                 $('.kontak-banner').css('margin-top','20px');

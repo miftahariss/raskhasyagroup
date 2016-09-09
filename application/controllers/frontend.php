@@ -19,8 +19,9 @@ class Frontend extends CI_Controller {
         $data['content_sipil']      = $this->m_frontend->getCategoryByIdMenu(2);
         $data['content_alatberat']  = $this->m_frontend->getCategoryByIdMenu(3);
         $data['content_material']   = $this->m_frontend->getCategoryByIdMenu(4);
-        $data['content_teknologi']  = $this->m_frontend->getCategoryByIdMenu(5);
-        $data['content_lainlain']   = $this->m_frontend->getCategoryByIdMenu(6);
+        $data['content_precast']    = $this->m_frontend->getCategoryByIdMenu(5);
+        $data['content_teknologi']  = $this->m_frontend->getCategoryByIdMenu(6);
+        $data['content_lainlain']   = $this->m_frontend->getCategoryByIdMenu(7);
 
 
         //$data['category']           = $this->m_frontend->getCategory();
