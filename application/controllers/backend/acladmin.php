@@ -303,6 +303,50 @@ class Acladmin extends CI_Controller {
         return $format_upload;
     }
 
+    public function add_menu() {
+        $permalink = url_title($this->input->post('title'), 'dash', true);
+        if ($this->input->post('submit')) {
+            // validation
+            $valid = $this->form_validation;
+            $valid->set_rules('title', 'Judul', 'required');
+            //$valid->set_rules('id_menu', 'Menu', 'required');
+            //$valid->set_rules('short_desc', 'Short Desc', 'required');
+            //$valid->set_rules('body', 'Isi', 'required');
+            // if (isset($_FILES['userfile']['name']) && $_FILES['userfile']['name'] == "") {
+            //     $valid->set_rules('userfile', 'Foto', 'required');
+            // }
+
+            if ($valid->run() == false) {
+                // run
+            } else {
+
+                //$format_upload = $this->upload();
+                $data = array(
+                    'title' => $this->input->post('title'),
+                    //'short_desc' => $this->input->post('short_desc'),
+                    //'body' => $this->input->post('body'),
+                    //'filename' => $format_upload,
+                    //'headline'         => $this->input->post('headline') ? 1 : 0,
+                    'permalink' => $permalink,
+                    'created_date' => time(),
+                    'modified_date' => null,
+                    'created_by' => $this->sess_id,
+                    'modified_by' => null,
+                    'status' => 1,
+                );
+
+                $id = $this->acladminmodel->addMenu($data);
+
+                redirect('backend/acladmin/view_menu');
+            }
+        }
+        $data['page'] = 'add_menu';
+        $data['title'] = 'Tambah Menu Baru';
+
+        $data['content'] = $this->load->view('acladmin/module/add_menu', $data, true);
+        $this->load->view('acladmin/main', $data);
+    }
+
     public function add_category() {
         $permalink = url_title($this->input->post('title'), 'dash', true);
         if ($this->input->post('submit')) {
@@ -618,6 +662,26 @@ class Acladmin extends CI_Controller {
         $this->load->view('acladmin/main', $data);
     }
 
+    public function view_menu() {
+        $data['headline'] = $this->input->get('filter') ? $this->input->get('filter') : '1';
+        $this->load->library('pagination');
+        $config['base_url'] = site_url('backend/acladmin/view_menu');
+        $config['per_page'] = $this->limit;
+        $config['total_rows'] = $this->acladminmodel->countMenu(1);
+        $config['uri_segment'] = 4;
+        $config['first_url'] = $config['base_url'] . '?' . http_build_query($_GET);
+        $this->pagination->initialize($config);
+
+        $page = ($this->uri->segment(4) ? $this->uri->segment(4) : '');
+        $data['media'] = $this->acladminmodel->fetchMenu2($config['per_page'], $page);
+        $data['links'] = $this->pagination->create_links();
+        $data['total_rows'] = $config['total_rows'];
+        $data['page'] = 'view_menu';
+        $data['title'] = 'Menu';
+        $data['content'] = $this->load->view('acladmin/module/view_menu', $data, true);
+        $this->load->view('acladmin/main', $data);
+    }
+
     public function view_category() {
         $data['headline'] = $this->input->get('filter') ? $this->input->get('filter') : '1';
         $this->load->library('pagination');
@@ -799,6 +863,50 @@ class Acladmin extends CI_Controller {
         $data['title'] = 'Store';
         $data['content'] = $this->load->view('acladmin/module/view_about', $data, true);
         $this->load->view('acladmin/main', $data);
+    }
+
+    public function edit_menu() {
+        $id = $this->uri->segment(4);
+        if ($id) {
+            $permalink = url_title($this->input->post('title'), 'dash', true);
+            if ($this->input->post('submit')) {
+                $valid = $this->form_validation;
+                $valid->set_rules('title', 'Judul', 'required');
+                //$valid->set_rules('id_menu', 'Menu', 'required');
+                //$valid->set_rules('short_desc', 'Short Desc', 'required');
+                //$valid->set_rules('body', 'Isi', 'required');
+
+                if ($valid->run() == false) {
+                    // show error in view
+                } else {
+                    //$format_upload = $this->upload();
+                    //$video_id = $this->get_youtube_id_from_url($this->input->post('video_id'));
+                    $data = array(
+                        'id' => $id,
+                        'title' => $this->input->post('title'),
+                        //'short_desc' => $this->input->post('short_desc'),
+                        //'body' => $this->input->post('body'),
+                        //'filename' => $format_upload,
+                        //'headline'         => $this->input->post('headline') ? 1 : 0,
+                        'permalink' => $permalink,
+                        'modified_date' => time(),
+                        'modified_by' => $this->sess_id,
+                        'status' => 1
+                    );
+                    $this->acladminmodel->updateMenu($data, $id);
+
+                    redirect('backend/acladmin/view_menu');
+                }
+            }
+            $data['page'] = 'edit_menu';
+            $data['title'] = 'Edit Menu';
+            $data['article'] = $this->acladminmodel->getIdMenu($id);
+            
+            $data['content'] = $this->load->view('acladmin/module/edit_menu', $data, true);
+            $this->load->view('acladmin/main', $data);
+        } else {
+            redirect('backend/acladmin/view_menu');
+        }
     }
 
     public function edit_category() {
@@ -1621,6 +1729,17 @@ class Acladmin extends CI_Controller {
             $this->load->view('acladmin/main', $data);
         } else {
             redirect('backend/acladmin/view_about');
+        }
+    }
+
+    public function delete_menu() {
+        if ($this->uri->segment(4)) {
+            $data = array('status' => 0);
+            $id = $this->uri->segment(4);
+            $this->acladminmodel->deleteMenu($data, $id);
+            redirect('backend/acladmin/view_menu');
+        } else {
+            redirect('backend/acladmin/view_menu');
         }
     }
 

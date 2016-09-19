@@ -12,6 +12,13 @@
                     </ul>
                 </li>
                 <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menu <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="<?php echo base_url()?>backend/acladmin/add_menu"><span class="icon-plus-sign"></span> Add Menu</a></li>
+                        <li><a href="<?php echo base_url()?>backend/acladmin/view_menu"><span class="icon-list"></span> View Menu</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Category <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="<?php echo base_url()?>backend/acladmin/add_category"><span class="icon-plus-sign"></span> Add Category</a></li>

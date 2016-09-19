@@ -95,6 +95,16 @@ class Acladminmodel extends CI_Model {
      * @param $headline = 1
      * @return type
      */
+
+    public function countMenu($status) {
+        $this->db->select('id');
+        $this->db->from($this->table['menu']);
+        $this->db->where('status', $status);
+
+        $count = $this->db->count_all_results();
+
+        return $count;
+    }
     
     public function countCategory($status) {
         $this->db->select('id');
@@ -202,6 +212,18 @@ class Acladminmodel extends CI_Model {
         $this->db->from($this->table['menu']);
         $this->db->where('status', 1);
 
+        $this->db->order_by('id', 'asc');
+        $query = $this->db->get();
+
+        return $query->result();
+    }
+
+    public function fetchMenu2($limit, $start) {
+        $this->db->select('*');
+        $this->db->from($this->table['menu']);
+        $this->db->where('status', 1);
+
+        $this->db->limit($limit, $start);
         $this->db->order_by('id', 'asc');
         $query = $this->db->get();
 
@@ -462,6 +484,12 @@ class Acladminmodel extends CI_Model {
      * save article
      * @param type $data
      */
+
+    public function addMenu($data) {
+        $this->db->insert($this->table['menu'], $data);
+
+        return $this->db->insert_id();
+    }
     
     public function addCategory($data) {
         $this->db->insert($this->table['category'], $data);
@@ -627,6 +655,11 @@ class Acladminmodel extends CI_Model {
      * @param type $data
      * @param type $id
      */
+
+    public function updateMenu($data, $id) {
+        $this->db->where('id', $id);
+        $this->db->update($this->table['menu'], $data);
+    }
     
     public function updateCategory($data, $id) {
         $this->db->where('id', $id);
@@ -738,6 +771,11 @@ class Acladminmodel extends CI_Model {
      * @param type $data
      * @param type $id
      */
+
+    public function deleteMenu($data, $id) {
+        $this->db->where('id', $id);
+        $this->db->update($this->table['menu'], $data);
+    }
     
     public function deleteCategory($data, $id) {
         $this->db->where('id', $id);
